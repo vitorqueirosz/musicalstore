@@ -1,11 +1,8 @@
 import type { NextPage } from 'next';
+import { Home as HomeTemplate } from 'templates';
 
 const Home: NextPage = () => {
-  return (
-    <div>
-      <h1>test</h1>
-    </div>
-  );
+  return <HomeTemplate />;
 };
 
 export default Home;
