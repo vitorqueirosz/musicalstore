@@ -21,13 +21,7 @@ export const Button = ({
   color = 'primary',
   ...props
 }: ButtonProps) => (
-  <S.Wrapper
-    size={size}
-    fullWidth={fullWidth}
-    hasIcon={!!icon}
-    color={color}
-    {...props}
-  >
+  <S.Wrapper size={size} fullWidth={fullWidth} color={color} {...props}>
     {icon}
     {!!children && <span>{children}</span>}
   </S.Wrapper>
