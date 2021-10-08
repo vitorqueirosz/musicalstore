@@ -36,7 +36,7 @@ export const Logo = ({
         </g>
         <defs>
           <filter
-            id="filter0_d"
+            id={`filter0_${id}`}
             x="-4"
             y="0"
             width="260"

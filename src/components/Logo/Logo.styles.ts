@@ -22,6 +22,10 @@ const wrapperModifiers = {
 
 export const Wrapper = styled.div<LogoProps>`
   ${({ size, hideText }) => css`
+    svg {
+      width: 100%;
+    }
+
     ${size && wrapperModifiers[size]}
     ${hideText && wrapperModifiers.hideText()}
   `}
