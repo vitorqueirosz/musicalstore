@@ -1,9 +1,14 @@
-import { Container } from 'components';
+import { Container, Menu } from 'components';
 
 type BaseProps = {
   children: React.ReactNode;
 };
 
 export const Base = ({ children }: BaseProps) => {
-  return <Container>{children}</Container>;
+  return (
+    <Container>
+      <Menu />
+      {children}
+    </Container>
+  );
 };

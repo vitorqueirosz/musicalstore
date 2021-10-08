@@ -1,5 +1,6 @@
 import {
   createGlobalStyle,
+  css,
   DefaultTheme,
   GlobalStyleComponent,
 } from 'styled-components';
@@ -10,40 +11,38 @@ export const GlobalStyles: GlobalStyleComponent<
 > = createGlobalStyle`
 
   @font-face {
-    font-family: 'Rowdies';
+    font-family: 'Rowdies Light';
     font-style: normal;
     font-weight: 300;
-    src: local('Rowdies Light'),
-      url('/fonts/rowdies-v5-latin-300.woff2') format('woff2'),
+    src: url('/fonts/rowdies-v5-latin-300.woff2') format('woff2');
   }
   @font-face {
-    font-family: 'Rowdies';
+    font-family: 'Rowdies Regular';
     font-style: normal;
     font-weight: 400;
-    src: local('Rowdies Regular'),
-      url('/fonts/rowdies-v5-latin-regular.woff2') format('woff2'),
+    src: url('/fonts/rowdies-v5-latin-regular.woff2') format('woff2');
   }
   @font-face {
-    font-family: 'Rowdies';
+    font-family: 'Rowdies Bold';
     font-style: normal;
     font-weight: 700;
-    src: local('Rowdies Bold'),
-      url('/fonts/rowdies-v5-latin-700.woff2') format('woff2'),
+    src: url('/fonts/rowdies-v5-latin-700.woff2') format('woff2');
   }
 
   @font-face {
-    font-family: 'Poppins';
+    font-family: 'Poppins Regular';
     font-style: normal;
     font-weight: 400;
-    src: local('Poppins Regular'),
-      url('/fonts/poppins-v15-latin-regular.woff2') format('woff2'),
+    font-display: swap;
+    src: url('/fonts/poppins-v15-latin-regular.woff2') format('woff2');
   }
+
   @font-face {
-    font-family: 'Poppins';
+    font-family: 'Poppins Medium';
     font-style: normal;
     font-weight: 500;
-    src: local('Poppins Medium'),
-      url('/fonts/poppins-v15-latin-500.woff2') format('woff2'),
+    font-display: swap;
+    src: url('/fonts/poppins-v15-latin-500.woff2') format('woff2');
   }
 
   * {
@@ -57,6 +56,14 @@ export const GlobalStyles: GlobalStyleComponent<
     &::after {
       box-sizing: inherit;
     }
+  }
+
+  body {
+    ${({ theme }) => css`
+      font-family: ${theme.font.family.primary};
+      background: ${theme.colors.mainBg};
+      font-size: ${theme.font.sizes.md};
+    `}
   }
 
   html {

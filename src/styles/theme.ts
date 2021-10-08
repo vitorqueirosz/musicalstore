@@ -9,8 +9,12 @@ export default {
     md: '1.6rem',
   },
   font: {
-    family:
-      "Rowdies, Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+    family: {
+      primary:
+        "Poppins Regular, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+      secondary:
+        "Rowdies Light, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+    },
     light: 300,
     normal: 400,
     bold: 600,
@@ -20,6 +24,7 @@ export default {
       sm: '1.4rem',
       md: '1.6rem',
       lg: '1.8rem',
+      '2lg': '2.2rem',
       xlg: '2.0rem',
       '2xlg': '2.8rem',
       hg: '5.2rem',
