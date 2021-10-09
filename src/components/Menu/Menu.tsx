@@ -1,19 +1,10 @@
 import { Logo } from 'components';
 import { Button } from 'components/Button/Button';
-import { LinkElement, Nav } from 'components/Nav/Nav';
+import { Icon } from 'components';
+import { Nav } from 'components/Nav/Nav';
+import { links } from './Menu.mock';
 
 import * as S from './Menu.styles';
-
-const links: LinkElement[] = [
-  {
-    href: '/home',
-    label: 'Home',
-  },
-  {
-    href: '/search',
-    label: 'Search',
-  },
-];
 
 export const Menu = () => {
   return (
@@ -24,6 +15,7 @@ export const Menu = () => {
       </S.Divisor>
 
       <S.Divisor>
+        <Icon icon="IcCart" />
         <Button>Sign in</Button>
       </S.Divisor>
     </S.Wrapper>

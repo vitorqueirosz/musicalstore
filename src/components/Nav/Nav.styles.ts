@@ -12,6 +12,6 @@ export const MenuLink = styled.a<MenuLinkProps>`
     margin: 0 ${theme.spacings['2xs']};
     color: ${theme.colors.white};
     font-family: 'Rowdies Light';
-    font-size: ${theme.font.sizes['2lg']};
+    font-size: ${theme.font.sizes.lg};
   `}
 `;
