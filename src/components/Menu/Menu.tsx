@@ -22,9 +22,7 @@ export const Menu = () => {
       </MediaMatch>
 
       <S.Divisor>
-        <div>
-          <Icon icon="IcCart" />
-        </div>
+        <Icon icon="IcCart" />
 
         <S.SignInButton>
           <MediaMatch lessThan="medium">

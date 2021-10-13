@@ -23,10 +23,14 @@ describe('<Logo />', () => {
   });
 
   it('should render the Logo without text', () => {
-    const { container } = renderWithTheme(<Logo hideText />);
+    renderWithTheme(<Logo hideText />);
 
-    expect(container.querySelector('.text')).toHaveStyle({
-      display: 'none',
-    });
+    expect(screen.getByRole('img').parentElement).toHaveStyleRule(
+      'width',
+      '6rem',
+      {
+        media: '(max-width: 768px)',
+      },
+    );
   });
 });

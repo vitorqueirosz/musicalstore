@@ -35,7 +35,7 @@ export const MobileMenu = styled.div`
 `;
 
 export const Aside = styled.aside<AsideProps>`
-  ${({ isOpen }) => css`
+  ${({ theme, isOpen }) => css`
     display: none;
     width: 60%;
     position: fixed;
@@ -46,6 +46,15 @@ export const Aside = styled.aside<AsideProps>`
     transition: transform 0.3s ease-in-out;
     background: #060606;
     pointer-events: ${isOpen ? 'all' : 'none'};
+    padding: ${theme.spacings.xs};
+
+    span {
+      color: ${theme.colors.white};
+    }
+
+    > nav {
+      margin-top: ${theme.spacings.sm};
+    }
 
     ${media.lessThan('medium')`
       display: block;

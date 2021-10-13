@@ -10,6 +10,7 @@ export const Wrapper = styled.nav`
 
   ${media.lessThan('medium')`
     display: flex;
+    margin: 0;
     flex-direction: column;
   `}
 `;

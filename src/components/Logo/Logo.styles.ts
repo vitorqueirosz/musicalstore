@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 import { LogoProps } from './Logo';
 
 const wrapperModifiers = {
@@ -21,11 +22,13 @@ const wrapperModifiers = {
     }
   `,
   hideText: (isSmall?: boolean) => css`
-    width: 6rem;
+    ${media.lessThan('medium')`
+      width: 6rem;
 
-    .text {
-      display: none;
-    }
+      .text {
+        display: none;
+      }
+    `}
 
     ${isSmall && wrapperModifiers.small()}
   `,
