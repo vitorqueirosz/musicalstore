@@ -10,7 +10,7 @@ type IconProps = {
   color?: string;
 };
 
-export const Icon = styled.svg.attrs<IconProps>(({ icon }) => ({
+export const Icon = styled.svg.attrs<IconProps>(({ icon = 'IcCart' }) => ({
   as: Icons[icon],
 }))<IconProps>`
   ${({ theme, width = '2.4rem', height = '2.4rem', color }) => css`

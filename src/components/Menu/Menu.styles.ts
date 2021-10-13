@@ -1,17 +1,67 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Wrapper as ButtonWrapper } from 'components/Button/Button.styles';
+import media from 'styled-media-query';
+
+type AsideProps = {
+  isOpen: boolean;
+};
 
 export const Wrapper = styled.menu`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const Divisor = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 
-  ${ButtonWrapper} {
+  ${media.greaterThan('medium')`
+    flex: 1;
+  `}
+`;
+
+const asideModifiers = {
+  open: () => css`
+    transform: translateX(0);
+  `,
+};
+
+export const MobileMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Aside = styled.aside<AsideProps>`
+  ${({ isOpen }) => css`
+    display: none;
+    width: 60%;
+    position: fixed;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    background: #060606;
+    pointer-events: ${isOpen ? 'all' : 'none'};
+
+    ${media.lessThan('medium')`
+      display: block;
+    `}
+
+    ${isOpen && asideModifiers.open()}
+  `}
+`;
+
+export const IconWrapper = styled.button`
+  border: none;
+  background: none;
+`;
+
+export const SignInButton = styled.div`
+  ${ButtonWrapper}, svg {
     margin-left: ${({ theme }) => theme.spacings.xs};
   }
 `;

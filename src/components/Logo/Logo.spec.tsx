@@ -6,7 +6,7 @@ describe('<Logo />', () => {
   it('should render the default Logo correctly', () => {
     const { container } = renderWithTheme(<Logo />);
 
-    expect(screen.getByRole('img').parentElement).toHaveStyle({
+    expect(screen.getByRole('img')).toHaveStyle({
       width: '20rem',
       height: '8rem',
     });
@@ -16,7 +16,7 @@ describe('<Logo />', () => {
   it('should render the large Logo correctly', () => {
     renderWithTheme(<Logo size="large" />);
 
-    expect(screen.getByRole('img').parentElement).toHaveStyle({
+    expect(screen.getByRole('img')).toHaveStyle({
       width: '31.5rem',
       height: '10rem',
     });
@@ -24,11 +24,6 @@ describe('<Logo />', () => {
 
   it('should render the Logo without text', () => {
     const { container } = renderWithTheme(<Logo hideText />);
-
-    expect(screen.getByRole('img').parentElement).toHaveStyle({
-      width: '8rem',
-      height: '8rem',
-    });
 
     expect(container.querySelector('.text')).toHaveStyle({
       display: 'none',

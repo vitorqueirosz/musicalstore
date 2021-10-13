@@ -3,7 +3,7 @@ import * as S from './Logo.styles';
 export type LogoProps = {
   id?: string;
   hideText?: boolean;
-  size?: 'normal' | 'large';
+  size?: 'small' | 'normal' | 'large';
 };
 
 export const Logo = ({
@@ -20,6 +20,7 @@ export const Logo = ({
         fill="none"
         role="img"
         xmlns="http://www.w3.org/2000/svg"
+        aria-label="logo"
       >
         <g filter={`url(#filter0_${id})`}>
           <g clipPath="url(#clip0)">

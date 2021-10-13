@@ -3,3 +3,5 @@ export * from './Layouts/Layouts';
 export * from './Logo/Logo';
 export * from './Menu/Menu';
 export * from './Icon/Icon';
+export * from './Nav/Nav';
+export * from './MediaMatch/MediaMatch';

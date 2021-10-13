@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components';
+import media from 'styled-media-query';
 
 type MenuLinkProps = {
   isActive?: boolean;
@@ -6,6 +7,11 @@ type MenuLinkProps = {
 
 export const Wrapper = styled.nav`
   margin: 0 ${({ theme }) => theme.spacings.xs};
+
+  ${media.lessThan('medium')`
+    display: flex;
+    flex-direction: column;
+  `}
 `;
 
 const menuLinkModifiers = {
@@ -24,6 +30,11 @@ export const MenuLink = styled.a<MenuLinkProps>`
     text-decoration: none;
     border-bottom: 1px solid ${theme.colors.white};
     transition: all 0.3s ease-in-out;
+
+    ${media.lessThan('medium')`
+      border-bottom: 0;
+      margin-bottom: ${theme.spacings['2xs']};
+    `}
 
     ${isActive && menuLinkModifiers.active(theme)}
   `}
