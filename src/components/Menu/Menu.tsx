@@ -1,16 +1,17 @@
 import { Logo, Nav, Button, Icon, MediaMatch } from 'components';
-import { useToggle } from 'hooks/useToggle';
+import { useToggle, useClickOutside } from 'hooks';
 import { links } from './Menu.mock';
 
 import * as S from './Menu.styles';
 
 export const Menu = () => {
-  const [isOpen, setIsOpen] = useToggle();
+  const [isOpen, setIsOpen] = useToggle(false);
+  const asideElementRef = useClickOutside(() => setIsOpen(false));
 
   return (
     <S.Wrapper>
       <MediaMatch lessThan="medium">
-        <S.IconWrapper onClick={setIsOpen}>
+        <S.IconWrapper onClick={() => setIsOpen()}>
           <Icon icon="IcMenu" />
         </S.IconWrapper>
       </MediaMatch>
@@ -34,7 +35,7 @@ export const Menu = () => {
         </S.SignInButton>
       </S.Divisor>
 
-      <S.Aside isOpen={isOpen}>
+      <S.Aside isOpen={isOpen} ref={asideElementRef}>
         <Logo hideText />
 
         <span>Ola, Vitor!</span>

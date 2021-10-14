@@ -53,7 +53,7 @@ export const Aside = styled.aside<AsideProps>`
     }
 
     > nav {
-      margin-top: ${theme.spacings.sm};
+      margin-top: ${theme.spacings.xs};
     }
 
     ${media.lessThan('medium')`
