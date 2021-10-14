@@ -12,7 +12,7 @@ export const Menu = () => {
     <S.Wrapper>
       <MediaMatch lessThan="medium">
         <S.IconWrapper onClick={() => setIsOpen()}>
-          <Icon icon="IcMenu" />
+          <Icon icon="IcMenu" aria-label="Open Menu" />
         </S.IconWrapper>
       </MediaMatch>
 
@@ -23,7 +23,9 @@ export const Menu = () => {
       </MediaMatch>
 
       <S.Divisor>
-        <Icon icon="IcCart" />
+        <S.IconWrapper onClick={() => setIsOpen()}>
+          <Icon icon="IcCart" aria-label="cart" />
+        </S.IconWrapper>
 
         <S.SignInButton>
           <MediaMatch lessThan="medium">
@@ -35,7 +37,12 @@ export const Menu = () => {
         </S.SignInButton>
       </S.Divisor>
 
-      <S.Aside isOpen={isOpen} ref={asideElementRef}>
+      <S.Aside
+        isOpen={isOpen}
+        ref={asideElementRef}
+        aria-hidden={!isOpen}
+        aria-label="menu"
+      >
         <Logo hideText />
 
         <span>Ola, Vitor!</span>
