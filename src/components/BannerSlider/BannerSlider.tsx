@@ -3,7 +3,7 @@ import { BannerProps } from 'components/Banner/Banner';
 import { Settings } from 'react-slick';
 import * as S from './BannerSlider.styles';
 
-type BannerSliderProps = {
+export type BannerSliderProps = {
   banners: BannerProps[];
 };
 
