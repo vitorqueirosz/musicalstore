@@ -5,3 +5,6 @@ export * from './Menu/Menu';
 export * from './Icon/Icon';
 export * from './Nav/Nav';
 export * from './MediaMatch/MediaMatch';
+export * from './Banner/Banner';
+export * from './Slider/Slider';
+export * from './BannerSlider/BannerSlider';

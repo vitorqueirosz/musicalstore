@@ -1,9 +1,9 @@
 import * as S from './Banner.styles';
 
 type BannerProps = {
-  img: string;
+  image: string;
 };
 
-export const Banner = ({ img }: BannerProps) => {
-  return <S.Wrapper src={img} />;
+export const Banner = ({ image }: BannerProps) => {
+  return <S.Wrapper src={image} />;
 };
