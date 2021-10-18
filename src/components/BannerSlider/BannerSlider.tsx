@@ -1,9 +1,10 @@
 import { Slider, Banner } from 'components';
+import { BannerProps } from 'components/Banner/Banner';
 import { Settings } from 'react-slick';
 import * as S from './BannerSlider.styles';
 
 type BannerSliderProps = {
-  banners: string[];
+  banners: BannerProps[];
 };
 
 const settings: Settings = {
@@ -20,7 +21,7 @@ export const BannerSlider = ({ banners }: BannerSliderProps) => {
     <S.Wrapper>
       <Slider settings={settings}>
         {banners.map((banner) => (
-          <Banner key={banner} image={banner} />
+          <Banner key={banner.image} {...banner} />
         ))}
       </Slider>
     </S.Wrapper>

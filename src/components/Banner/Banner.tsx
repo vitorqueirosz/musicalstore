@@ -1,9 +1,19 @@
+import { Button } from 'components';
 import * as S from './Banner.styles';
 
-type BannerProps = {
+export type BannerProps = {
   image: string;
+  buttonLabel?: string;
 };
 
-export const Banner = ({ image }: BannerProps) => {
-  return <S.Wrapper src={image} />;
+export const Banner = ({ image, buttonLabel }: BannerProps) => {
+  return (
+    <S.Wrapper src={image}>
+      {buttonLabel && (
+        <S.Overlay>
+          <Button>{buttonLabel}</Button>
+        </S.Overlay>
+      )}
+    </S.Wrapper>
+  );
 };
