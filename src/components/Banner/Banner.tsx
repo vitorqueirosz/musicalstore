@@ -8,7 +8,7 @@ export type BannerProps = {
 
 export const Banner = ({ image, buttonLabel }: BannerProps) => {
   return (
-    <S.Wrapper src={image}>
+    <S.Wrapper aria-label="banner" src={image}>
       {buttonLabel && (
         <S.Overlay>
           <Button>{buttonLabel}</Button>
