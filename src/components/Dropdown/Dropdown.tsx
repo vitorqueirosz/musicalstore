@@ -16,14 +16,14 @@ export const Dropdown = ({
   const elementRef = useClickOutside(() => setShow(false));
 
   return (
-    <S.Wrapper>
+    <S.Wrapper show={show}>
       <S.Title onClick={() => setShow()}>{title}</S.Title>
-      <S.Content aria-hidden={!show} show={show} ref={elementRef}>
+      <S.Content aria-hidden={!show} ref={elementRef}>
         {children}
       </S.Content>
       {hasOverlay && (
         <S.Overlay
-          onClick={() => setShow()}
+          onClick={() => setShow(false)}
           aria-hidden={!hasOverlay || !show}
         />
       )}
