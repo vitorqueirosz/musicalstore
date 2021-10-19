@@ -9,3 +9,4 @@ export * from './Banner/Banner';
 export * from './Slider/Slider';
 export * from './BannerSlider/BannerSlider';
 export * from './Dropdown/Dropdown';
+export * from './Product/Product';
