@@ -23,7 +23,7 @@ export const Menu = () => {
       </MediaMatch>
 
       <S.Divisor>
-        <S.IconWrapper onClick={() => setIsOpen()}>
+        <S.IconWrapper>
           <Icon icon="IcCart" aria-label="cart" />
         </S.IconWrapper>
 

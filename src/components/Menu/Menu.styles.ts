@@ -74,3 +74,5 @@ export const SignInButton = styled.div`
     margin-left: ${({ theme }) => theme.spacings.xs};
   }
 `;
+
+export const Cart = styled.div``;

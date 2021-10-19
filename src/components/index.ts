@@ -8,3 +8,4 @@ export * from './MediaMatch/MediaMatch';
 export * from './Banner/Banner';
 export * from './Slider/Slider';
 export * from './BannerSlider/BannerSlider';
+export * from './Dropdown/Dropdown';
