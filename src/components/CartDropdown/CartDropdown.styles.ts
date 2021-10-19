@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -10,6 +11,10 @@ export const Wrapper = styled.div`
     border-top-right-radius: 0;
     max-height: 25rem;
     padding: ${theme.spacings['2xs']};
+
+    ${media.lessThan('medium')`
+      width: 80vw;
+    `}
   `}
 `;
 

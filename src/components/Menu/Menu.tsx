@@ -37,7 +37,6 @@ export const Menu = () => {
               <Icon icon="IcCart" aria-label="cart" />
             </S.IconWrapper>
           }
-          hasOverlay
         >
           <CartDropdown />
         </Dropdown>

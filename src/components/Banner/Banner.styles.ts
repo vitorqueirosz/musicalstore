@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Wrapper as ButtonWrapper } from 'components/Button/Button.styles';
 import media from 'styled-media-query';
 
 type WrapperProps = {
@@ -29,6 +30,7 @@ export const Overlay = styled.div`
   ${({ theme }) => css`
     position: absolute;
     display: flex;
+
     justify-content: flex-end;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
@@ -39,5 +41,15 @@ export const Overlay = styled.div`
     border-bottom-left-radius: ${theme.borderRadius.sm};
     border-bottom-right-radius: ${theme.borderRadius.sm};
     padding-right: ${theme.spacings.xs};
+
+    ${media.lessThan('medium')`
+      height: 4.2rem;
+
+      ${ButtonWrapper} {
+        height: 2.8rem;
+        width: 12rem;
+        font-size: ${theme.font.sizes.sm};
+      }
+    `}
   `}
 `;
