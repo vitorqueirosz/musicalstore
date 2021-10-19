@@ -7,9 +7,13 @@ export type DropdownProps = {
   hasOverlay?: boolean;
 };
 
-export const Dropdown = ({ children, title, hasOverlay }: DropdownProps) => {
+export const Dropdown = ({
+  children,
+  title,
+  hasOverlay = false,
+}: DropdownProps) => {
   const [show, setShow] = useToggle(false);
-  const elementRef = useClickOutside(() => setShow());
+  const elementRef = useClickOutside(() => setShow(false));
 
   return (
     <S.Wrapper>

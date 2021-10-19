@@ -15,6 +15,7 @@ export const Wrapper = styled.div<WrapperProps>`
     max-width: 99rem;
     margin: auto;
     border-radius: ${({ theme }) => theme.borderRadius.sm};
+    index: 1;
 
     ${media.lessThan('medium')`
       width: 80vw;

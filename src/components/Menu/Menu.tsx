@@ -1,4 +1,12 @@
-import { Logo, Nav, Button, Icon, MediaMatch } from 'components';
+import {
+  Logo,
+  Nav,
+  Button,
+  Icon,
+  MediaMatch,
+  Dropdown,
+  CartDropdown,
+} from 'components';
 import { useToggle, useClickOutside } from 'hooks';
 import { links } from './Menu.mock';
 
@@ -23,9 +31,15 @@ export const Menu = () => {
       </MediaMatch>
 
       <S.Divisor>
-        <S.IconWrapper>
-          <Icon icon="IcCart" aria-label="cart" />
-        </S.IconWrapper>
+        <Dropdown
+          title={
+            <S.IconWrapper>
+              <Icon icon="IcCart" aria-label="cart" />
+            </S.IconWrapper>
+          }
+        >
+          <CartDropdown />
+        </Dropdown>
 
         <S.SignInButton>
           <MediaMatch lessThan="medium">
