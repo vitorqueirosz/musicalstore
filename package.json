@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "babel-plugin-inline-react-svg": "^2.0.1",
+    "graphql": "^15.6.1",
     "graphql-request": "^3.6.1",
     "next": "11.1.2",
     "polished": "^4.1.3",
