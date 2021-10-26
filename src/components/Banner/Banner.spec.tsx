@@ -12,7 +12,7 @@ describe('<Banner />', () => {
     const { container } = renderWithTheme(<Banner {...props} />);
 
     expect(container.firstChild).toHaveAttribute('src', props.image);
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
 
   it('should render the Banner with button', () => {
@@ -21,6 +21,6 @@ describe('<Banner />', () => {
     );
 
     expect(container.firstChild).toHaveAttribute('src', props.image);
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('link')).toBeInTheDocument();
   });
 });
