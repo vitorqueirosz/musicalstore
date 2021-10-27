@@ -14,3 +14,4 @@ export * from './CartDropdown/CartDropdown';
 export * from './ProductsSection/ProductsSection';
 export * from './Heading/Heading';
 export * from './Checkbox/Checkbox';
+export * from './CategoriesSidebar/CategoriesSidebar';

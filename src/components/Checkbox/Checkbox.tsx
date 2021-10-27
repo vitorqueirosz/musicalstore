@@ -7,19 +7,19 @@ export type CheckboxProps = {
   labelFor?: string;
   value?: string | ReadonlyArray<string> | number;
   name?: string;
-  labelSize?: 'normal' | 'large';
+  inputSize?: 'normal' | 'large';
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const Checkbox = ({
   label,
   labelFor,
-  labelSize = 'normal',
+  inputSize = 'normal',
   value,
   isChecked,
   ...props
 }: CheckboxProps) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper size={inputSize}>
       <S.Input
         id={labelFor}
         type="checkbox"
@@ -27,9 +27,7 @@ export const Checkbox = ({
         checked={!!value || isChecked}
         {...props}
       />
-      <S.Label htmlFor={labelFor} size={labelSize}>
-        {label}
-      </S.Label>
+      <S.Label htmlFor={labelFor}>{label}</S.Label>
     </S.Wrapper>
   );
 };

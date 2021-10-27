@@ -1,19 +1,42 @@
 import styled, { css, DefaultTheme } from 'styled-components';
 
-type LabelProps = {
+type WrapperProps = {
   size: 'normal' | 'large';
 };
 
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
+const wrapperModifiers = {
+  normal: (theme: DefaultTheme) => css`
+    ${Input} {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+    ${Label} {
+      font-size: ${theme.font.sizes.md};
+    }
+  `,
+  large: (theme: DefaultTheme) => css`
+    ${Input} {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+    ${Label} {
+      font-size: ${theme.font.sizes.lg};
+    }
+  `,
+};
+
+export const Wrapper = styled.div<WrapperProps>`
+  ${({ theme, size }) => css`
+    display: flex;
+    align-items: center;
+
+    ${size && wrapperModifiers[size](theme)}
+  `}
 `;
 
 export const Input = styled.input`
   ${({ theme }) => css`
     appearance: none;
-    width: 1rem;
-    height: 1rem;
     background: ${theme.colors.white};
     margin-right: ${theme.spacings['2xs']};
 
@@ -21,22 +44,15 @@ export const Input = styled.input`
       border-color: ${theme.colors.primary};
       background: ${theme.colors.primary};
     }
+
+    &:focus {
+      box-shadow: 0 0 0.5rem ${theme.colors.primary};
+    }
   `}
 `;
 
-const labelModifiers = {
-  normal: (theme: DefaultTheme) => css`
-    font-size: ${theme.font.sizes.sm};
-  `,
-  large: (theme: DefaultTheme) => css`
-    font-size: ${theme.font.sizes.md};
-  `,
-};
-
-export const Label = styled.label<LabelProps>`
-  ${({ theme, size }) => css`
+export const Label = styled.label`
+  ${({ theme }) => css`
     color: ${theme.colors.white};
-
-    ${size && labelModifiers[size](theme)}
   `}
 `;
