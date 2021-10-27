@@ -1,4 +1,4 @@
-import { Heading } from 'components';
+import { Heading, Checkbox } from 'components';
 import { Base } from 'templates';
 import * as S from './Search.styles';
 
@@ -9,7 +9,7 @@ export const Search = () => {
         <Heading>Categorias</Heading>
 
         <S.Aside>
-          <div />
+          <Checkbox label="Bateria" />
         </S.Aside>
       </S.Content>
     </Base>
