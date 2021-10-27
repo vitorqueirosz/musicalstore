@@ -7,6 +7,7 @@ export default {
     xs: '0.4rem',
     sm: '0.8rem',
     md: '1.6rem',
+    rounded: '50%',
   },
   font: {
     family: {

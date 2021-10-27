@@ -1,5 +1,4 @@
-import { ProductProps } from 'components/Product/Product';
-import { Slider, Product } from 'components';
+import { Slider, Product, Icon, ProductProps } from 'components';
 import * as S from './ProductsSection.styles';
 import { Settings } from 'react-slick';
 
@@ -14,12 +13,15 @@ const settings: Settings = {
   slidesToScroll: 2,
   infinite: false,
   arrows: true,
+  prevArrow: <Icon icon="IcChevronLeft" />,
+  nextArrow: <Icon icon="IcChevronRight" />,
   responsive: [
     {
       breakpoint: 768,
       settings: {
         slidesToShow: 4,
         slidesToScroll: 1,
+        arrows: false,
       },
     },
     {
@@ -27,6 +29,7 @@ const settings: Settings = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
+        arrows: false,
       },
     },
     {
@@ -34,6 +37,7 @@ const settings: Settings = {
       settings: {
         slidesToShow: 1.7,
         slidesToScroll: 1,
+        arrows: false,
       },
     },
   ],

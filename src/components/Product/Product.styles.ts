@@ -1,3 +1,4 @@
+import { EllipsisMultiLine } from 'components/EllipsisMultiline/EllipsisMultiline';
 import styled, { css, DefaultTheme } from 'styled-components';
 import { ProductProps } from './Product';
 
@@ -7,8 +8,9 @@ const wrapperModifiers = {
   vertical: (theme: DefaultTheme) => css`
     flex-direction: column;
     max-width: 14.5rem;
-    height: 23.5rem;
+    height: 24.5rem;
     border-radius: ${theme.borderRadius.xs};
+    cursor: pointer;
 
     ${Content} {
       flex-direction: column;
@@ -16,7 +18,8 @@ const wrapperModifiers = {
 
     ${Image} {
       width: 100%;
-      height: 12rem;
+      min-height: 12rem;
+      max-height: 12rem;
     }
 
     ${Infos} {
@@ -33,6 +36,12 @@ const wrapperModifiers = {
       svg {
         width: 1.4rem;
         height: 1.4rem;
+      }
+    }
+
+    &:hover {
+      ${RemoveProduct} {
+        transform: translateY(0);
       }
     }
   `,
@@ -81,14 +90,25 @@ export const Image = styled.img``;
 
 export const Infos = styled.div`
   ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
     span,
     p {
-      font-size: ${theme.font.sizes.sm};
+      font-size: ${theme.font.sizes.xs};
       color: ${theme.colors.gray};
+      ${EllipsisMultiLine}
+      -webkit-line-clamp: 3;
+    }
+
+    p {
+      flex: 1;
     }
 
     span {
       font-weight: bold;
+      margin-top: calc(${theme.spacings['2xs']} / 2);
     }
   `}
 `;
@@ -97,4 +117,6 @@ export const RemoveProduct = styled.button`
   cursor: pointer;
   border: none;
   background: none;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
 `;
