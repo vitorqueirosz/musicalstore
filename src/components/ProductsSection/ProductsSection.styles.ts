@@ -8,13 +8,6 @@ export const Wrapper = styled.div`
   `}
 `;
 
-export const Heading = styled.span`
-  ${({ theme }) => css`
-    color: ${theme.colors.white};
-    border-bottom: 2px solid ${theme.colors.secondary};
-  `}
-`;
-
 export const Content = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.xs};

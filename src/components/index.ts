@@ -12,3 +12,4 @@ export * from './Dropdown/Dropdown';
 export * from './Product/Product';
 export * from './CartDropdown/CartDropdown';
 export * from './ProductsSection/ProductsSection';
+export * from './Heading/Heading';

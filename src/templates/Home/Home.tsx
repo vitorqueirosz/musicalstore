@@ -1,4 +1,4 @@
-import { Base } from 'templates/Base/Base';
+import { Base } from 'templates';
 import {
   BannerProps,
   BannerSlider,

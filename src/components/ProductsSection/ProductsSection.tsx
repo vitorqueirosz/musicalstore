@@ -1,4 +1,4 @@
-import { Slider, Product, Icon, ProductProps } from 'components';
+import { Slider, Product, Icon, ProductProps, Heading } from 'components';
 import * as S from './ProductsSection.styles';
 import { Settings } from 'react-slick';
 
@@ -46,7 +46,7 @@ const settings: Settings = {
 export const ProductsSection = ({ title, products }: ProductsSectionProps) => {
   return (
     <S.Wrapper>
-      <S.Heading>{title}</S.Heading>
+      <Heading>{title}</Heading>
 
       <S.Content>
         <Slider settings={settings}>
