@@ -18,3 +18,18 @@ export const translatedLabel = {
   [ENUM_TYPES.sax]: 'Saxofone',
   [ENUM_TYPES.flute]: 'Flauta',
 };
+
+export const mockedFilterItems = [
+  {
+    category: ENUM_CATEGORIES.drum,
+    types: [ENUM_TYPES.sticks],
+  },
+  {
+    category: ENUM_CATEGORIES.rope,
+    types: [ENUM_TYPES.guitar],
+  },
+  {
+    category: ENUM_CATEGORIES.blow,
+    types: [ENUM_TYPES.harmonica],
+  },
+];
