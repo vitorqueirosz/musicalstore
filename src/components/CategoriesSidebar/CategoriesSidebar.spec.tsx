@@ -6,7 +6,12 @@ import { mockedFilterItems } from './CategoriesSidebar.mock';
 
 describe('<CategoriesSidebar />', () => {
   it('should return the component correctly', () => {
-    renderWithTheme(<CategoriesSidebar filterItems={mockedFilterItems} />);
+    renderWithTheme(
+      <CategoriesSidebar
+        filterItems={mockedFilterItems}
+        onFilterValues={jest.fn()}
+      />,
+    );
 
     expect(
       screen.getByRole('checkbox', { name: /bateria/i }),

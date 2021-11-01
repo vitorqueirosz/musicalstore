@@ -24,7 +24,7 @@ export const Checkbox = ({
         id={labelFor}
         type="checkbox"
         value={value}
-        checked={!!value || isChecked}
+        checked={isChecked}
         {...props}
       />
       <S.Label htmlFor={labelFor}>{label}</S.Label>
