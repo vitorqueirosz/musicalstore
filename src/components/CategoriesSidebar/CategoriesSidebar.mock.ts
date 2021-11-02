@@ -22,7 +22,7 @@ export const translatedLabel = {
 export const mockedFilterItems = [
   {
     category: ENUM_CATEGORIES.drum,
-    types: [ENUM_TYPES.sticks],
+    types: [ENUM_TYPES.sticks, ENUM_TYPES.pads, ENUM_TYPES.skins],
   },
   {
     category: ENUM_CATEGORIES.rope,

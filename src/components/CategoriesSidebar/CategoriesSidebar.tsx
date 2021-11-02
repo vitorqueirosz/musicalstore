@@ -11,7 +11,7 @@ export type FilterItems = {
 
 type InitialValues = {
   category: string[];
-  type: { name: string; type: string }[];
+  type: string[];
 };
 
 type CategoriesSidebarProps = {
@@ -22,25 +22,25 @@ type CategoriesSidebarProps = {
 
 const types = {
   [ENUM_CATEGORIES.drum]: [
-    { name: ENUM_TYPES.sticks, type: ENUM_CATEGORIES.drum },
-    { name: ENUM_TYPES.childishDrum, type: ENUM_CATEGORIES.drum },
-    { name: ENUM_TYPES.box, type: ENUM_CATEGORIES.drum },
-    { name: ENUM_TYPES.pads, type: ENUM_CATEGORIES.drum },
-    { name: ENUM_TYPES.skins, type: ENUM_CATEGORIES.drum },
-    { name: ENUM_TYPES.dish, type: ENUM_CATEGORIES.drum },
+    ENUM_TYPES.sticks,
+    ENUM_TYPES.childishDrum,
+    ENUM_TYPES.box,
+    ENUM_TYPES.pads,
+    ENUM_TYPES.skins,
+    ENUM_TYPES.dish,
   ],
   [ENUM_CATEGORIES.rope]: [
-    { name: ENUM_TYPES.guitar, type: ENUM_CATEGORIES.rope },
-    { name: ENUM_TYPES.acoustic, type: ENUM_CATEGORIES.rope },
-    { name: ENUM_TYPES.bass, type: ENUM_CATEGORIES.rope },
-    { name: ENUM_TYPES.ukulele, type: ENUM_CATEGORIES.rope },
+    ENUM_TYPES.guitar,
+    ENUM_TYPES.acoustic,
+    ENUM_TYPES.bass,
+    ENUM_TYPES.ukulele,
   ],
   [ENUM_CATEGORIES.blow]: [
-    { name: ENUM_TYPES.harmonica, type: ENUM_CATEGORIES.blow },
-    { name: ENUM_TYPES.sax, type: ENUM_CATEGORIES.blow },
-    { name: ENUM_TYPES.flute, type: ENUM_CATEGORIES.blow },
+    ENUM_TYPES.harmonica,
+    ENUM_TYPES.sax,
+    ENUM_TYPES.flute,
   ],
-} as Record<string, { name: string; type: string }[]>;
+} as Record<string, string[]>;
 
 const LAST_ITEM = 1;
 
@@ -58,7 +58,11 @@ export const CategoriesSidebar = ({
     useState<InitialValues>(initialValues);
 
   const handleFilterValues = useCallback(
-    (value: ENUM_CATEGORIES | ENUM_TYPES, fieldName: 'category' | 'type') => {
+    (
+      value: ENUM_CATEGORIES | ENUM_TYPES,
+      fieldName: 'category' | 'type',
+      category?: ENUM_CATEGORIES,
+    ) => {
       setFilterValues((prevState) => {
         const hasCategory = prevState.category.includes(value);
 
@@ -66,8 +70,11 @@ export const CategoriesSidebar = ({
           const filteredCategories = prevState.category.filter(
             (category) => category !== value,
           );
+
+          const typesByCategory = types[value];
+
           const filteredTypes = prevState.type.filter(
-            (item) => item.type !== value,
+            (type) => !typesByCategory.includes(type),
           );
 
           return {
@@ -76,25 +83,20 @@ export const CategoriesSidebar = ({
           };
         }
 
-        if (fieldName === 'type') {
-          const category = Object.values(types).reduce((acc, type) => {
-            const typeExists = type.find((t) => t.name === value);
-
-            return (acc = typeExists?.type || acc);
-          }, '');
-
-          const hasType = prevState.type.some((type) => type.name === value);
+        if (fieldName === 'type' && category) {
+          const hasType = prevState.type.includes(value);
+          const typesByCategory = types[category];
 
           if (hasType) {
             const hasCategoryFallback =
               fallbackValues.category.includes(category);
 
-            const typesLength = prevState.type.filter(
-              (type) => type.type === category,
+            const typesLength = prevState.type.filter((type) =>
+              typesByCategory.includes(type),
             ).length;
 
             const filteredTypes = prevState.type.filter(
-              (type) => type.name !== value,
+              (type) => type !== value,
             );
 
             const hasOneLastType = typesLength === LAST_ITEM;
@@ -107,15 +109,15 @@ export const CategoriesSidebar = ({
             }
 
             const filteredTypesByCategory = prevState.type.filter(
-              (type) => type.type !== category,
+              (type) => !typesByCategory.includes(type),
             );
 
             const filteredCategories = prevState.category.filter(
               (c) => c !== category,
             );
 
-            const hasTypeFallback = fallbackValues.type.some(
-              (t) => t.type === category,
+            const hasTypeFallback = fallbackValues.type.some((type) =>
+              typesByCategory.includes(type),
             );
 
             const categories = hasOneLastType
@@ -124,7 +126,7 @@ export const CategoriesSidebar = ({
 
             const typesArr = hasTypeFallback
               ? filteredTypes
-              : [...filteredTypesByCategory, { name: value, type: category }];
+              : [...filteredTypesByCategory, value];
 
             return {
               category: categories,
@@ -139,7 +141,7 @@ export const CategoriesSidebar = ({
 
           return {
             category: categories,
-            type: [...prevState.type, { name: value, type: category }],
+            type: [...prevState.type, value],
           };
         }
 
@@ -182,19 +184,9 @@ export const CategoriesSidebar = ({
         };
       }
 
-      const category = Object.values(types).reduce((acc, type) => {
-        const typeExists = type.find((t) => t.name === value);
-
-        return (acc = typeExists?.type || acc);
-      }, '');
-
-      const hasCategory = prevState.type.some((type) => type.name === value);
-      const filteredTypes = prevState.type.filter(
-        (type) => type.name !== value,
-      );
-      const typesArr = hasCategory
-        ? filteredTypes
-        : [...prevState.type, { name: value, type: category }];
+      const hasCategory = prevState.type.includes(value);
+      const filteredTypes = prevState.type.filter((type) => type !== value);
+      const typesArr = hasCategory ? filteredTypes : [...prevState.type, value];
 
       return {
         category: [...prevState.category],
@@ -220,8 +212,8 @@ export const CategoriesSidebar = ({
                 key={type}
                 label={translatedLabel[type]}
                 labelFor={type}
-                isChecked={fallbackValues.type.some((t) => t.name === type)}
-                onChange={() => handleFilterValues(type, 'type')}
+                isChecked={fallbackValues.type.includes(type)}
+                onChange={() => handleFilterValues(type, 'type', item.category)}
               />
             ))}
           </S.Divisor>
