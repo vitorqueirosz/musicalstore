@@ -1,5 +1,8 @@
+import { useCallback } from 'react';
 import { Heading, CategoriesSidebar } from 'components';
 import { ENUM_CATEGORIES, ENUM_TYPES } from 'constants/enums';
+import { useRouter } from 'next/dist/client/router';
+import { ParsedUrlQueryInput } from 'querystring';
 import { Base } from 'templates';
 import * as S from './Search.styles';
 
@@ -31,11 +34,26 @@ const filterItems = [
 ];
 
 export const Search = () => {
+  const { push } = useRouter();
+
+  const handleFilterValues = useCallback(
+    (items: ParsedUrlQueryInput) => {
+      push({
+        pathname: '/search',
+        query: items,
+      });
+    },
+    [push],
+  );
+
   return (
     <Base>
       <S.Content>
         <Heading>Categorias</Heading>
-        <CategoriesSidebar filterItems={filterItems} />
+        <CategoriesSidebar
+          filterItems={filterItems}
+          onFilterValues={handleFilterValues}
+        />
       </S.Content>
     </Base>
   );
