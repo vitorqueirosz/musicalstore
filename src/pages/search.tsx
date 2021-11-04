@@ -1,9 +1,14 @@
+import { ProductProps } from 'components';
 import { GetServerSideProps } from 'next';
-import { Search as SearchTemplate, SearchProps } from 'templates';
+import { Search as SearchTemplate } from 'templates';
 import { getSearchProducts } from 'utils/search';
 
+type SearchProps = {
+  products: ProductProps[];
+};
+
 export const Search = ({ products }: SearchProps) => {
-  return <SearchTemplate products={products} />;
+  return <SearchTemplate initialData={products} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {

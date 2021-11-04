@@ -11,9 +11,10 @@ import { useRouter } from 'next/dist/client/router';
 import { ParsedUrlQueryInput } from 'querystring';
 import { Base } from 'templates';
 import * as S from './Search.styles';
+import { useSearchProducts } from 'hooks';
 
 export type SearchProps = {
-  products: ProductProps[];
+  initialData: ProductProps[];
 };
 
 export const initialValue = {
@@ -48,9 +49,16 @@ const filterItems = [
   },
 ];
 
-export const Search = ({ products }: SearchProps) => {
+export const Search = ({ initialData }: SearchProps) => {
   const { query, push } = useRouter();
   const pushRef = useRef(push);
+
+  const { data } = useSearchProducts(
+    {
+      products: initialData,
+    },
+    query,
+  );
 
   const handleFilterValues = useCallback((items: ParsedUrlQueryInput) => {
     pushRef.current({
@@ -59,7 +67,7 @@ export const Search = ({ products }: SearchProps) => {
     });
   }, []);
 
-  const queryValue = useMemo(() => {
+  const initialValues = useMemo(() => {
     const hasQueryValue = Object.keys(query).length;
 
     if (hasQueryValue) return query;
@@ -74,9 +82,9 @@ export const Search = ({ products }: SearchProps) => {
         <CategoriesSidebar
           filterItems={filterItems}
           onFilterValues={handleFilterValues}
-          initialValues={queryValue as InitialValues}
+          initialValues={initialValues as InitialValues}
         />
-        {products.map((product) => (
+        {data?.products.map((product) => (
           <Product key={product.id} {...product} />
         ))}
       </S.Content>
