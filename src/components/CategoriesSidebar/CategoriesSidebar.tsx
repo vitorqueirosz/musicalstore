@@ -9,14 +9,14 @@ export type FilterItems = {
   types: ENUM_TYPES[];
 };
 
-type InitialValues = {
+export type InitialValues = {
   category: string[];
   type: string[];
 };
 
 type CategoriesSidebarProps = {
   filterItems: FilterItems[];
-  initialValues?: InitialValues;
+  initialValues: InitialValues;
   onFilterValues: (values: InitialValues) => void;
 };
 
@@ -46,10 +46,7 @@ const LAST_ITEM = 1;
 
 export const CategoriesSidebar = ({
   filterItems,
-  initialValues = {
-    category: [],
-    type: [],
-  },
+  initialValues,
   onFilterValues,
 }: CategoriesSidebarProps) => {
   const [filterValues, setFilterValues] =
@@ -155,10 +152,6 @@ export const CategoriesSidebar = ({
     [fallbackValues.category, fallbackValues.type],
   );
 
-  useEffect(() => {
-    onFilterValues(filterValues);
-  }, [onFilterValues, filterValues]);
-
   const handleFallbackValues = (
     value: string,
     fieldName: 'category' | 'type',
@@ -194,6 +187,10 @@ export const CategoriesSidebar = ({
       };
     });
   };
+
+  useEffect(() => {
+    onFilterValues(filterValues);
+  }, [onFilterValues, filterValues]);
 
   return (
     <S.Aside>

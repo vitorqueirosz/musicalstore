@@ -2,6 +2,7 @@ import { Icon } from 'components';
 import * as S from './Product.styles';
 
 export type ProductProps = {
+  id: string;
   image: string;
   name: string;
   price: string;

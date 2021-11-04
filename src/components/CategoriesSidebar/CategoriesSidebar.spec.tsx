@@ -5,6 +5,7 @@ import { CategoriesSidebar } from './CategoriesSidebar';
 import { mockedFilterItems } from './CategoriesSidebar.mock';
 import { ENUM_CATEGORIES, ENUM_TYPES } from 'constants/enums';
 import userEvent from '@testing-library/user-event';
+import { initialValue } from 'templates';
 
 describe('<CategoriesSidebar />', () => {
   it('should return the component correctly', () => {
@@ -12,6 +13,7 @@ describe('<CategoriesSidebar />', () => {
       <CategoriesSidebar
         filterItems={mockedFilterItems}
         onFilterValues={jest.fn()}
+        initialValues={initialValue}
       />,
     );
 
@@ -50,6 +52,7 @@ describe('<CategoriesSidebar />', () => {
       <CategoriesSidebar
         filterItems={mockedFilterItems}
         onFilterValues={onFilterValues}
+        initialValues={initialValue}
       />,
     );
 
@@ -70,6 +73,7 @@ describe('<CategoriesSidebar />', () => {
       <CategoriesSidebar
         filterItems={mockedFilterItems}
         onFilterValues={onFilterValues}
+        initialValues={initialValue}
       />,
     );
 
@@ -91,6 +95,7 @@ describe('<CategoriesSidebar />', () => {
       <CategoriesSidebar
         filterItems={mockedFilterItems}
         onFilterValues={onFilterValues}
+        initialValues={initialValue}
       />,
     );
 

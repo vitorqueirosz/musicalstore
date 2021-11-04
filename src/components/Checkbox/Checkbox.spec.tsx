@@ -22,7 +22,12 @@ describe('<Checkbox />', () => {
 
   it('should check on click', () => {
     renderWithTheme(
-      <Checkbox label="Bateria" labelFor="drum" onChange={jest.fn()} />,
+      <Checkbox
+        label="Bateria"
+        labelFor="drum"
+        onChange={jest.fn()}
+        value="drum"
+      />,
     );
 
     const checkboxElement = screen.getByRole('checkbox');

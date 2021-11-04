@@ -1,10 +1,25 @@
-import { useCallback } from 'react';
-import { Heading, CategoriesSidebar } from 'components';
+import { useCallback, useMemo, useRef } from 'react';
+import {
+  Heading,
+  CategoriesSidebar,
+  InitialValues,
+  ProductProps,
+  Product,
+} from 'components';
 import { ENUM_CATEGORIES, ENUM_TYPES } from 'constants/enums';
 import { useRouter } from 'next/dist/client/router';
 import { ParsedUrlQueryInput } from 'querystring';
 import { Base } from 'templates';
 import * as S from './Search.styles';
+
+export type SearchProps = {
+  products: ProductProps[];
+};
+
+export const initialValue = {
+  category: [],
+  type: [],
+};
 
 const filterItems = [
   {
@@ -33,18 +48,24 @@ const filterItems = [
   },
 ];
 
-export const Search = () => {
-  const { push } = useRouter();
+export const Search = ({ products }: SearchProps) => {
+  const { query, push } = useRouter();
+  const pushRef = useRef(push);
 
-  const handleFilterValues = useCallback(
-    (items: ParsedUrlQueryInput) => {
-      push({
-        pathname: '/search',
-        query: items,
-      });
-    },
-    [push],
-  );
+  const handleFilterValues = useCallback((items: ParsedUrlQueryInput) => {
+    pushRef.current({
+      pathname: '/search',
+      query: items,
+    });
+  }, []);
+
+  const queryValue = useMemo(() => {
+    const hasQueryValue = Object.keys(query).length;
+
+    if (hasQueryValue) return query;
+
+    return initialValue;
+  }, [query]);
 
   return (
     <Base>
@@ -53,7 +74,11 @@ export const Search = () => {
         <CategoriesSidebar
           filterItems={filterItems}
           onFilterValues={handleFilterValues}
+          initialValues={queryValue as InitialValues}
         />
+        {products.map((product) => (
+          <Product key={product.id} {...product} />
+        ))}
       </S.Content>
     </Base>
   );
