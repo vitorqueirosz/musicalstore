@@ -70,7 +70,15 @@ export const Search = ({ initialData }: SearchProps) => {
   const initialValues = useMemo(() => {
     const hasQueryValue = Object.keys(query).length;
 
-    if (hasQueryValue) return query;
+    if (hasQueryValue) {
+      return Object.entries(query).reduce((acc, [key, value]) => {
+        if (Array.isArray(value)) {
+          return (acc = { ...acc, [key]: value });
+        }
+
+        return (acc = { ...acc, [key]: [value] });
+      }, {});
+    }
 
     return initialValue;
   }, [query]);

@@ -11,7 +11,9 @@ export const getSearchProducts = (query: ParsedUrlQuery) => {
   const graphQLClient = initializeClient();
 
   const variables = {
-    ...query,
+    where: {
+      ...query,
+    },
     limit: 12,
   };
 
