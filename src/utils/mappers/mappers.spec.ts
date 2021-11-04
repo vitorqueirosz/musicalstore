@@ -5,6 +5,7 @@ import { homeMapper } from '.';
 describe('homeMapper()', () => {
   it('should return the data correctly', () => {
     const product = {
+      id: '1',
       name: 'product',
       price: '5',
       images: [

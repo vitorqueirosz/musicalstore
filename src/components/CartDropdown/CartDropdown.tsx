@@ -8,7 +8,7 @@ export const CartDropdown = () => {
       <S.Title>Carrinho</S.Title>
 
       {products.map((product) => (
-        <Product key={product.image} {...product} />
+        <Product key={product.id} {...product} />
       ))}
     </S.Wrapper>
   );

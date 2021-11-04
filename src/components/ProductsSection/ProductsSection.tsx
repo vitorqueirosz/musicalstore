@@ -51,7 +51,7 @@ export const ProductsSection = ({ title, products }: ProductsSectionProps) => {
       <S.Content>
         <Slider settings={settings}>
           {products.map((product) => (
-            <Product key={product.image} {...product} />
+            <Product key={product.id} {...product} />
           ))}
         </Slider>
       </S.Content>
