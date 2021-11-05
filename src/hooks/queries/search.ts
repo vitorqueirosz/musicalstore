@@ -7,7 +7,11 @@ export const useSearchProducts = (
   initialData: SearchQueryPayload,
   query: ParsedUrlQuery,
 ) => {
-  return useQuery<SearchQueryPayload>(SEARCH, () => getSearchProducts(query), {
-    initialData,
-  });
+  return useQuery<SearchQueryPayload>(
+    [SEARCH, Object.values(query)],
+    async () => await getSearchProducts(query),
+    {
+      initialData,
+    },
+  );
 };

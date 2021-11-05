@@ -49,26 +49,7 @@ export const Search = ({ initialData }: SearchProps) => {
   const { query, push } = useRouter();
   const pushRef = useRef(push);
 
-  const { data } = useSearchProducts(
-    {
-      products: initialData,
-    },
-    query,
-  );
-
-  const products = useMemo(
-    () => productsWithDefaultImgUrl(data?.products),
-    [data?.products],
-  );
-
-  const handleFilterValues = useCallback((items: ParsedUrlQueryInput) => {
-    pushRef.current({
-      pathname: '/search',
-      query: items,
-    });
-  }, []);
-
-  const initialValues = useMemo(() => {
+  const queryValues = useMemo(() => {
     const hasQueryValue = Object.keys(query).length;
 
     if (hasQueryValue) {
@@ -84,6 +65,25 @@ export const Search = ({ initialData }: SearchProps) => {
     return initialValue;
   }, [query]);
 
+  const { data } = useSearchProducts(
+    {
+      products: initialData,
+    },
+    queryValues,
+  );
+
+  const products = useMemo(
+    () => productsWithDefaultImgUrl(data?.products),
+    [data?.products],
+  );
+
+  const handleFilterValues = useCallback((items: ParsedUrlQueryInput) => {
+    pushRef.current({
+      pathname: '/search',
+      query: items,
+    });
+  }, []);
+
   return (
     <Base>
       <S.Content>
@@ -92,7 +92,7 @@ export const Search = ({ initialData }: SearchProps) => {
           <CategoriesSidebar
             filterItems={filterItems}
             onFilterValues={handleFilterValues}
-            initialValues={initialValues as InitialValues}
+            initialValues={queryValues as InitialValues}
           />
           <S.List>
             {products.map((product) => (

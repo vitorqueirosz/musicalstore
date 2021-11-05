@@ -7,7 +7,7 @@ export type SearchQueryPayload = {
   products: ProductsByQuery[];
 };
 
-export const getSearchProducts = (query: ParsedUrlQuery) => {
+export const getSearchProducts = async (query: ParsedUrlQuery) => {
   const graphQLClient = initializeClient();
 
   const variables = {
@@ -17,5 +17,8 @@ export const getSearchProducts = (query: ParsedUrlQuery) => {
     limit: 12,
   };
 
-  return graphQLClient.request<SearchQueryPayload>(QUERY_PRODUCTS, variables);
+  return await graphQLClient.request<SearchQueryPayload>(
+    QUERY_PRODUCTS,
+    variables,
+  );
 };
