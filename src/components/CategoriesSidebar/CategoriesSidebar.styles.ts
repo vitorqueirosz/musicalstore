@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Aside = styled.aside`
-  ${({ theme }) => css`
-    padding: ${theme.spacings.xs} 0;
-  `}
-`;
+export const Aside = styled.aside``;
 
 export const Divisor = styled.div`
   ${({ theme }) => css`
@@ -12,8 +8,4 @@ export const Divisor = styled.div`
   `}
 `;
 
-export const Category = styled.div`
-  ${({ theme }) => css`
-    margin: ${theme.spacings.sm} 0;
-  `}
-`;
+export const Category = styled.div``;

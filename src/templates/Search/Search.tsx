@@ -87,14 +87,18 @@ export const Search = ({ initialData }: SearchProps) => {
     <Base>
       <S.Content>
         <Heading>Categorias</Heading>
-        <CategoriesSidebar
-          filterItems={filterItems}
-          onFilterValues={handleFilterValues}
-          initialValues={initialValues as InitialValues}
-        />
-        {data?.products.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
+        <S.Main>
+          <CategoriesSidebar
+            filterItems={filterItems}
+            onFilterValues={handleFilterValues}
+            initialValues={initialValues as InitialValues}
+          />
+          <S.List>
+            {data?.products.map((product) => (
+              <Product key={product.id} {...product} />
+            ))}
+          </S.List>
+        </S.Main>
       </S.Content>
     </Base>
   );

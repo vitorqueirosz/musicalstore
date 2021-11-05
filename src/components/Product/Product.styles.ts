@@ -42,6 +42,8 @@ const wrapperModifiers = {
     &:hover {
       ${RemoveProduct} {
         transform: translateY(0);
+        pointer-events: all;
+        opacity: 1;
       }
     }
   `,
@@ -118,5 +120,7 @@ export const RemoveProduct = styled.button`
   border: none;
   background: none;
   transform: translateY(100%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+  pointer-events: none;
+  opacity: 0;
 `;
