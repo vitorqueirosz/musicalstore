@@ -12,7 +12,9 @@ const bannersWithDefaultImgUrl = (banners: BannersByQuery[] | undefined) => {
     : [];
 };
 
-const productsWithDefaultImgUrl = (products: ProductsByQuery[] | undefined) => {
+export const productsWithDefaultImgUrl = (
+  products: ProductsByQuery[] | undefined,
+) => {
   return products?.length
     ? products.map((product) => ({
         ...product,

@@ -1,20 +1,16 @@
 import { useCallback, useMemo, useRef } from 'react';
-import {
-  Heading,
-  CategoriesSidebar,
-  InitialValues,
-  ProductProps,
-  Product,
-} from 'components';
+import { Heading, CategoriesSidebar, InitialValues, Product } from 'components';
 import { ENUM_CATEGORIES, ENUM_TYPES } from 'constants/enums';
 import { useRouter } from 'next/dist/client/router';
 import { ParsedUrlQueryInput } from 'querystring';
 import { Base } from 'templates';
 import * as S from './Search.styles';
 import { useSearchProducts } from 'hooks';
+import { productsWithDefaultImgUrl } from 'utils/mappers';
+import { ProductsByQuery } from 'types/common';
 
 export type SearchProps = {
-  initialData: ProductProps[];
+  initialData: ProductsByQuery[];
 };
 
 export const initialValue = {
@@ -60,6 +56,11 @@ export const Search = ({ initialData }: SearchProps) => {
     query,
   );
 
+  const products = useMemo(
+    () => productsWithDefaultImgUrl(data?.products),
+    [data?.products],
+  );
+
   const handleFilterValues = useCallback((items: ParsedUrlQueryInput) => {
     pushRef.current({
       pathname: '/search',
@@ -94,7 +95,7 @@ export const Search = ({ initialData }: SearchProps) => {
             initialValues={initialValues as InitialValues}
           />
           <S.List>
-            {data?.products.map((product) => (
+            {products.map((product) => (
               <Product key={product.id} {...product} />
             ))}
           </S.List>

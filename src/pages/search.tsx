@@ -1,10 +1,10 @@
-import { ProductProps } from 'components';
 import { GetServerSideProps } from 'next';
 import { Search as SearchTemplate } from 'templates';
+import { ProductsByQuery } from 'types/common';
 import { getSearchProducts } from 'utils/search';
 
 type SearchProps = {
-  products: ProductProps[];
+  products: ProductsByQuery[];
 };
 
 export const Search = ({ products }: SearchProps) => {
