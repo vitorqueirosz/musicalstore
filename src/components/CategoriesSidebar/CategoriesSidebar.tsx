@@ -51,8 +51,30 @@ export const CategoriesSidebar = ({
 }: CategoriesSidebarProps) => {
   const [filterValues, setFilterValues] =
     useState<InitialValues>(initialValues);
-  const [fallbackValues, setFallbackValues] =
-    useState<InitialValues>(initialValues);
+  const [fallbackValues, setFallbackValues] = useState<InitialValues>(() => {
+    return initialValues.category.reduce((acc, key) => {
+      const typesByCategory = types[key];
+
+      const filteredTypesLength = initialValues.type.filter((type) =>
+        typesByCategory.includes(type),
+      ).length;
+
+      const typesByCategoryLength = typesByCategory.length;
+
+      if (typesByCategoryLength === filteredTypesLength) {
+        const filteredTypes = acc.type.filter(
+          (type) => !typesByCategory.includes(type),
+        );
+
+        return (acc = {
+          category: [...acc.category],
+          type: [...filteredTypes],
+        });
+      }
+
+      return acc;
+    }, initialValues);
+  });
 
   const handleFilterValues = useCallback(
     (

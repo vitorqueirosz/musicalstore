@@ -109,4 +109,41 @@ describe('<CategoriesSidebar />', () => {
 
     expect(onFilterValues).toHaveBeenLastCalledWith(values);
   });
+
+  it('should not check all types if the user only selected a category', () => {
+    const filterItems = [
+      {
+        category: ENUM_CATEGORIES.drum,
+        types: [ENUM_TYPES.sticks],
+      },
+      {
+        category: ENUM_CATEGORIES.rope,
+        types: [ENUM_TYPES.guitar],
+      },
+      {
+        category: ENUM_CATEGORIES.blow,
+        types: [ENUM_TYPES.harmonica, ENUM_TYPES.sax, ENUM_TYPES.flute],
+      },
+    ];
+
+    const onFilterValues = jest.fn();
+
+    renderWithTheme(
+      <CategoriesSidebar
+        filterItems={filterItems}
+        onFilterValues={onFilterValues}
+        initialValues={{
+          category: [ENUM_CATEGORIES.blow],
+          type: [ENUM_TYPES.harmonica, ENUM_TYPES.sax, ENUM_TYPES.flute],
+        }}
+      />,
+    );
+
+    expect(screen.getByRole('checkbox', { name: /sopro/i })).toBeChecked();
+    expect(screen.getByRole('checkbox', { name: /gaita/i })).not.toBeChecked();
+    expect(
+      screen.getByRole('checkbox', { name: /saxofone/i }),
+    ).not.toBeChecked();
+    expect(screen.getByRole('checkbox', { name: /flauta/i })).not.toBeChecked();
+  });
 });
