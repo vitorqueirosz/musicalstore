@@ -1,5 +1,5 @@
 import { BannerProps, ProductsSectionProps } from 'components';
-import { ImageByQuery, ProductsByQuery } from 'types/common';
+import { ImageByQuery, ProductByQuery } from 'types/common';
 import { QUERY_HOME } from 'graphql/queries/home';
 import { initializeClient } from './apollo';
 
@@ -8,7 +8,7 @@ export type BannersByQuery = Omit<BannerProps, 'image'> & {
 };
 
 type ProductsSectionByQuery = Omit<ProductsSectionProps, 'products'> & {
-  products: ProductsByQuery[];
+  products: ProductByQuery[];
 };
 
 export type HomeQueryPayload = {

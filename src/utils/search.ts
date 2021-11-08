@@ -1,10 +1,10 @@
 import { QUERY_PRODUCTS } from 'graphql/queries/search';
 import { ParsedUrlQuery } from 'querystring';
-import { ProductsByQuery } from 'types/common';
+import { ProductByQuery } from 'types/common';
 import { initializeClient } from './apollo';
 
 export type SearchQueryPayload = {
-  products: ProductsByQuery[];
+  products: ProductByQuery[];
 };
 
 export const getSearchProducts = async (query: ParsedUrlQuery) => {

@@ -1,5 +1,5 @@
-import { HomeProps } from 'templates';
-import { ProductsByQuery } from 'types/common';
+import { HomeProps, ProductDetailsProps } from 'templates';
+import { ProductByQuery, ProductDetailsByQuery } from 'types/common';
 import { BannersByQuery, HomeQueryPayload } from 'utils/home';
 import { setDefaultUrlToImg } from 'utils/setDefaultUrlToImg';
 
@@ -13,7 +13,7 @@ const bannersWithDefaultImgUrl = (banners: BannersByQuery[] | undefined) => {
 };
 
 export const productsWithDefaultImgUrl = (
-  products: ProductsByQuery[] | undefined,
+  products: ProductByQuery[] | undefined,
 ) => {
   return products?.length
     ? products.map((product) => ({
@@ -37,4 +37,19 @@ export const homeMapper = (homeProps: HomeQueryPayload | undefined) => {
   };
 
   return homePayload;
+};
+
+export const productDetailsMapper = (product: ProductDetailsByQuery) => {
+  const productPayload: ProductDetailsProps = {
+    id: product.id,
+    name: product.name,
+    images: product.images.map((image) => setDefaultUrlToImg(image.url)),
+    price: product.price,
+    brand: product.brand,
+    description: product.description,
+    category: product.category,
+    type: product.type,
+  };
+
+  return productPayload;
 };

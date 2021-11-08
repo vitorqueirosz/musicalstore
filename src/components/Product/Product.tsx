@@ -1,4 +1,6 @@
 import { Icon } from 'components';
+import { ROUTES } from 'constants/routes';
+import Link from 'next/link';
 import * as S from './Product.styles';
 
 export type ProductProps = {
@@ -10,6 +12,7 @@ export type ProductProps = {
 };
 
 export const Product = ({
+  id,
   image,
   name,
   price,
@@ -17,13 +20,15 @@ export const Product = ({
 }: ProductProps) => {
   return (
     <S.Wrapper type={type}>
-      <S.Content>
-        <S.Image src={image} alt={name} />
-        <S.Infos>
-          <p>{name}</p>
-          <span>{price}</span>
-        </S.Infos>
-      </S.Content>
+      <Link href={ROUTES.PRODUCT_BY_ID(id)} passHref>
+        <S.Content>
+          <S.Image src={image} alt={name} />
+          <S.Infos>
+            <p>{name}</p>
+            <span>{price}</span>
+          </S.Infos>
+        </S.Content>
+      </Link>
 
       <S.RemoveProduct>
         {type === 'horizontal' ? <span>Remover</span> : <Icon icon="IcCart" />}

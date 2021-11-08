@@ -7,10 +7,10 @@ import { Base } from 'templates';
 import * as S from './Search.styles';
 import { useSearchProducts } from 'hooks';
 import { productsWithDefaultImgUrl } from 'utils/mappers';
-import { ProductsByQuery } from 'types/common';
+import { ProductByQuery } from 'types/common';
 
 export type SearchProps = {
-  initialData: ProductsByQuery[];
+  initialData: ProductByQuery[];
 };
 
 export const initialValue = {
