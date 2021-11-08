@@ -1,4 +1,4 @@
-import { SEARCH } from 'constants/urls';
+import { ENDPOINTS } from 'constants/endpoints';
 import { ParsedUrlQuery } from 'querystring';
 import { useQuery } from 'react-query';
 import { getSearchProducts, SearchQueryPayload } from 'utils/search';
@@ -8,7 +8,7 @@ export const useSearchProducts = (
   query: ParsedUrlQuery,
 ) => {
   return useQuery<SearchQueryPayload>(
-    [SEARCH, Object.values(query)],
+    [ENDPOINTS.SEARCH, Object.values(query)],
     async () => await getSearchProducts(query),
     {
       initialData,

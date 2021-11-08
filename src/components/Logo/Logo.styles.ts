@@ -36,6 +36,8 @@ const wrapperModifiers = {
 
 export const Wrapper = styled.div<LogoProps>`
   ${({ size, hideText }) => css`
+    cursor: pointer;
+
     > svg {
       width: 100%;
     }
