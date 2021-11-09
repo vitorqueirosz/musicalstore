@@ -1,20 +1,18 @@
-import { useProductById } from 'hooks';
 import type { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/dist/client/router';
 import { Product as ProductTemplate } from 'templates';
 import { productDetailsMapper } from 'utils/mappers';
 import { getProductById, ProductQueryPayload } from 'utils/product';
 import { getSearchProducts } from 'utils/search';
 
 const Product = ({ products }: ProductQueryPayload) => {
+  const router = useRouter();
+
+  if (router.isFallback) return null;
+
   const [product] = products;
 
-  const { data } = useProductById(product.id, {
-    products,
-  });
-
-  const productDetails = data?.products[0];
-
-  return <ProductTemplate product={productDetailsMapper(productDetails!)} />;
+  return <ProductTemplate product={productDetailsMapper(product!)} />;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
