@@ -7,13 +7,15 @@ export type SearchQueryPayload = {
   products: ProductByQuery[];
 };
 
-export const getSearchProducts = async (query: ParsedUrlQuery) => {
+export const getSearchProducts = async (query?: ParsedUrlQuery) => {
   const graphQLClient = initializeClient();
 
   const variables = {
-    where: {
-      ...query,
-    },
+    ...(query && {
+      where: {
+        ...query,
+      },
+    }),
     limit: 12,
   };
 
