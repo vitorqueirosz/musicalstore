@@ -15,3 +15,4 @@ export * from './ProductsSection/ProductsSection';
 export * from './Heading/Heading';
 export * from './Checkbox/Checkbox';
 export * from './CategoriesSidebar/CategoriesSidebar';
+export * from './ProductDetails/ProductDetails';
