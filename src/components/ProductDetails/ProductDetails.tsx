@@ -35,6 +35,7 @@ export const ProductDetails = ({
         <S.Images>
           {images.map((image) => (
             <img
+              aria-label="thumb image"
               key={image}
               src={image}
               alt={image}
@@ -42,7 +43,11 @@ export const ProductDetails = ({
             />
           ))}
         </S.Images>
-        <S.Image src={selectedImage} alt={selectedImage} />
+        <S.Image
+          aria-label="highlight image"
+          src={selectedImage}
+          alt={selectedImage}
+        />
 
         <S.Infos>
           <S.Details>
