@@ -40,6 +40,8 @@ const wrapperModifiers = {
     }
 
     &:hover {
+      opacity: 1;
+
       ${RemoveProduct} {
         transform: translateY(0);
         pointer-events: all;

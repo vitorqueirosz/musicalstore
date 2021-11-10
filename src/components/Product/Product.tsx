@@ -21,7 +21,7 @@ export const Product = ({
   return (
     <S.Wrapper type={type}>
       <Link href={ROUTES.PRODUCT_BY_ID(id)} passHref>
-        <S.Content>
+        <S.Content aria-label="link">
           <S.Image src={image} alt={name} />
           <S.Infos>
             <p>{name}</p>
@@ -31,7 +31,7 @@ export const Product = ({
       </Link>
 
       <S.RemoveProduct>
-        {type === 'horizontal' ? <span>Remover</span> : <Icon icon="IcCart" />}
+        {type === 'horizontal' ? 'Remover' : <Icon icon="IcCart" />}
       </S.RemoveProduct>
     </S.Wrapper>
   );
