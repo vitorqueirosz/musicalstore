@@ -25,6 +25,9 @@ describe('<ProductDetails />', () => {
       'src',
       props.images[0],
     );
+    expect(screen.getAllByLabelText('thumb image')[0]).toHaveStyle({
+      'border-color': '#5200FF',
+    });
   });
 
   it('should change the selected image by clicking', () => {

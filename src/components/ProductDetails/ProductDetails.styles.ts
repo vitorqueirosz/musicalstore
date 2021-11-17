@@ -1,4 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
+
+type ZoomedImageProps = {
+  show: boolean;
+};
 
 export const Wrapper = styled.main`
   display: flex;
@@ -14,17 +18,61 @@ export const Grid = styled.div`
 `;
 
 export const Images = styled.div`
-  img {
-    width: 12rem;
-    height: 8rem;
-    object-fit: contain;
+  display: flex;
+  flex-direction: column;
+`;
+
+const thumbImageModifiers = {
+  selected: (theme: DefaultTheme) => css`
+    border-color: ${theme.colors.primary};
+  `,
+};
+
+export const ThumbImage = styled.img<{ selected: boolean }>`
+  width: 6.5rem;
+  height: 5.4rem;
+  cursor: pointer;
+  margin-bottom: ${({ theme }) => theme.spacings.xs};
+  border: 0.2rem solid transparent;
+
+  ${({ theme, selected }) => selected && thumbImageModifiers.selected(theme)}
+`;
+
+export const Box = styled.div`
+  max-width: 58rem;
+  height: 258px;
+  flex-grow: 1;
+
+  span {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
   }
 `;
 
 export const Image = styled.img`
-  width: 50rem;
-  max-height: 32rem;
-  margin: auto;
+  display: block;
+  height: auto;
+  max-width: 100%;
+`;
+
+const zoomedImageModifiers = {
+  show: () => css`
+    opacity: 1;
+  `,
+};
+
+export const ZoomedImage = styled.img<ZoomedImageProps>`
+  position: absolute;
+  opacity: 0;
+  width: 100rem;
+  height: 80rem;
+  border: none;
+  max-width: none;
+  max-height: none;
+  cursor: pointer;
+
+  ${({ show }) => show && zoomedImageModifiers.show()};
 `;
 
 export const Infos = styled.div`
