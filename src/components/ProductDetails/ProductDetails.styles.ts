@@ -40,7 +40,7 @@ export const ThumbImage = styled.img<{ selected: boolean }>`
 
 export const Box = styled.div`
   max-width: 58rem;
-  height: 258px;
+  height: 38rem;
   flex-grow: 1;
 
   span {
@@ -65,7 +65,7 @@ const zoomedImageModifiers = {
 export const ZoomedImage = styled.img<ZoomedImageProps>`
   position: absolute;
   opacity: 0;
-  width: 100rem;
+  width: 110rem;
   height: 80rem;
   border: none;
   max-width: none;
