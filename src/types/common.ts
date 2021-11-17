@@ -1,5 +1,4 @@
-import { ProductProps } from 'components';
-import { ProductDetailsProps } from 'templates';
+import { ProductDetailsProps, ProductProps } from 'components';
 
 export type ImageByQuery = {
   url: string;

@@ -1,4 +1,5 @@
-import { HomeProps, ProductDetailsProps } from 'templates';
+import { ProductDetailsProps } from 'components';
+import { HomeProps } from 'templates';
 import { ProductByQuery, ProductDetailsByQuery } from 'types/common';
 import { BannersByQuery, HomeQueryPayload } from 'utils/home';
 import { setDefaultUrlToImg } from 'utils/setDefaultUrlToImg';
