@@ -34,19 +34,13 @@ export const CartProvider = ({ children }: WithChildren) => {
     skip: !productIds.length,
   });
 
-  console.log(data);
-
   const addToCart = useCallback((id: string) => {
-    setProductIds((prevState) => {
-      if (!prevState) return [id];
-
-      return [id, ...prevState];
-    });
+    setProductIds((prevState) => [id, ...prevState]);
   }, []);
 
   const removeFromCart = useCallback((id: string) => {
     setProductIds((prevState) =>
-      prevState?.filter((productId) => productId !== id),
+      prevState.filter((productId) => productId !== id),
     );
   }, []);
 
