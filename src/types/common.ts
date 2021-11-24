@@ -11,3 +11,7 @@ export type ProductByQuery = Omit<ProductProps, 'image'> & {
 export type ProductDetailsByQuery = Omit<ProductDetailsProps, 'images'> & {
   images: ImageByQuery[];
 };
+
+export type WithChildren = {
+  children: React.ReactNode;
+};

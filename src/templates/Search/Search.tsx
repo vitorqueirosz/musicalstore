@@ -65,12 +65,10 @@ export const Search = ({ initialData }: SearchProps) => {
     return initialValue;
   }, [query]);
 
-  const { data } = useSearchProducts(
-    {
-      products: initialData,
-    },
-    queryValues,
-  );
+  const { data } = useSearchProducts({
+    query: queryValues,
+    initialData: { products: initialData },
+  });
 
   const products = useMemo(
     () => productsWithDefaultImgUrl(data?.products),

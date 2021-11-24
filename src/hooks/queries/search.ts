@@ -1,15 +1,25 @@
 import { ENDPOINTS } from 'constants/endpoints';
-import { ParsedUrlQuery } from 'querystring';
 import { useQuery } from 'react-query';
-import { getSearchProducts, SearchQueryPayload } from 'utils/search';
+import {
+  getSearchProducts,
+  QueryProps,
+  SearchQueryPayload,
+} from 'utils/search';
 
-export const useSearchProducts = (
-  initialData: SearchQueryPayload,
-  query: ParsedUrlQuery,
-) => {
+type SearchProductProps = {
+  query: QueryProps;
+  initialData?: SearchQueryPayload;
+  skip?: boolean;
+};
+
+export const useSearchProducts = ({
+  query,
+  initialData,
+  skip,
+}: SearchProductProps) => {
   return useQuery<SearchQueryPayload>(
     [ENDPOINTS.SEARCH, Object.values(query)],
-    async () => await getSearchProducts(query),
+    async () => await getSearchProducts(query, skip),
     {
       initialData,
     },

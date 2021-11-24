@@ -7,9 +7,13 @@ export type SearchQueryPayload = {
   products: ProductByQuery[];
 };
 
-export const getSearchProducts = async (query?: ParsedUrlQuery) => {
-  const graphQLClient = initializeClient();
+type QueryWidhId = { id: string[] };
 
+export type QueryProps = ParsedUrlQuery | QueryWidhId;
+
+const graphQLClient = initializeClient();
+
+export const getSearchProducts = async (query?: QueryProps, skip?: boolean) => {
   const variables = {
     ...(query && {
       where: {
@@ -17,6 +21,7 @@ export const getSearchProducts = async (query?: ParsedUrlQuery) => {
       },
     }),
     limit: 12,
+    skip: !!skip,
   };
 
   return await graphQLClient.request<SearchQueryPayload>(
