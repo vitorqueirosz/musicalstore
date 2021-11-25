@@ -19,7 +19,9 @@ export const Product = ({
   price,
   type = 'vertical',
 }: ProductProps) => {
-  const { addToCart } = useCart();
+  const { addToCart, removeFromCart, isInTheCart } = useCart();
+
+  const isProductInTheCart = isInTheCart(id);
 
   return (
     <S.Wrapper type={type}>
@@ -33,9 +35,36 @@ export const Product = ({
         </S.Content>
       </Link>
 
-      <S.RemoveProduct onClick={() => addToCart(id)}>
-        {type === 'horizontal' ? 'Remover' : <Icon icon="IcCart" />}
-      </S.RemoveProduct>
+      {type === 'vertical' ? (
+        <S.ButtonsContainer isInTheCart={isProductInTheCart}>
+          <S.ButtonCart
+            onClick={() =>
+              isProductInTheCart ? removeFromCart(id) : addToCart(id)
+            }
+          >
+            <Icon
+              aria-label={
+                isProductInTheCart ? 'remove from cart' : 'add to cart'
+              }
+              icon={isProductInTheCart ? 'IcTrash' : 'IcCart'}
+            />
+          </S.ButtonCart>
+
+          <S.AmountContainer>
+            <S.ButtonState>
+              <Icon icon="IcMinus" />
+            </S.ButtonState>
+
+            <span>1</span>
+
+            <S.ButtonState>
+              <Icon icon="IcPlus" />
+            </S.ButtonState>
+          </S.AmountContainer>
+        </S.ButtonsContainer>
+      ) : (
+        <S.RemoveProduct onClick={() => addToCart(id)}>Remover</S.RemoveProduct>
+      )}
     </S.Wrapper>
   );
 };

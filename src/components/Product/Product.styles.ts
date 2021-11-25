@@ -1,8 +1,13 @@
 import { EllipsisMultiLine } from 'components/EllipsisMultiline/EllipsisMultiline';
 import styled, { css, DefaultTheme } from 'styled-components';
 import { ProductProps } from './Product';
+import { darken } from 'polished';
 
 type WrapperProps = Pick<ProductProps, 'type'>;
+
+type RemoveProductProps = {
+  isInTheCart: boolean;
+};
 
 const wrapperModifiers = {
   vertical: (theme: DefaultTheme) => css`
@@ -26,23 +31,8 @@ const wrapperModifiers = {
       margin-top: ${theme.spacings['2xs']};
     }
 
-    ${RemoveProduct} {
-      min-height: 2.3rem;
-      background: ${theme.colors.secondary};
-      text-align: center;
-      border-bottom-left-radius: ${theme.borderRadius.xs};
-      border-bottom-right-radius: ${theme.borderRadius.xs};
-
-      svg {
-        width: 1.4rem;
-        height: 1.4rem;
-      }
-    }
-
     &:hover {
-      opacity: 1;
-
-      ${RemoveProduct} {
+      ${ButtonsContainer} {
         transform: translateY(0);
         pointer-events: all;
         opacity: 1;
@@ -120,9 +110,83 @@ export const Infos = styled.div`
 export const RemoveProduct = styled.button`
   cursor: pointer;
   border: none;
+  background: #000;
+`;
+
+const buttonsContainerModifiers = {
+  isInTheCart: (theme: DefaultTheme) => css`
+    transform: translateY(0);
+    pointer-events: all;
+    opacity: 1;
+
+    ${ButtonCart} {
+      background: ${theme.colors.red};
+    }
+
+    ${AmountContainer} {
+      width: 7rem;
+      opacity: 1;
+    }
+  `,
+};
+
+export const ButtonsContainer = styled.div<RemoveProductProps>`
+  ${({ theme, isInTheCart }) => css`
+    display: flex;
+    border: none;
+    background: ${theme.colors.secondary};
+    transform: translateY(100%);
+    border-bottom-left-radius: ${theme.borderRadius.xs};
+    border-bottom-right-radius: ${theme.borderRadius.xs};
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    pointer-events: none;
+    opacity: 0;
+    max-height: 2.3rem;
+
+    svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+
+    ${isInTheCart && buttonsContainerModifiers.isInTheCart(theme)}
+  `}
+`;
+
+export const ButtonCart = styled.div`
+  display: flex;
+  height: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: ${({ theme }) => theme.borderRadius.xs};
+  cursor: pointer;
+`;
+
+export const AmountContainer = styled.aside`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    width: 0;
+    opacity: 0;
+    transition: width 0.2s ease-in-out, opacity 0.3s ease-in-out;
+
+    span {
+      color: ${theme.colors.white};
+      padding: calc(${theme.spacings['2xs']} / 2);
+    }
+  `}
+`;
+
+export const ButtonState = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   background: none;
-  transform: translateY(100%);
-  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
-  pointer-events: none;
-  opacity: 0;
+  border: none;
+
+  &:hover {
+    background: ${({ theme }) => darken(0.1, theme.colors.secondary)};
+  }
 `;

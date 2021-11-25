@@ -24,10 +24,6 @@ describe('<Product />', () => {
     expect(wrapper).toHaveStyle({
       'max-width': '14.5rem',
     });
-
-    expect(screen.getByRole('button')).toHaveStyle({
-      'min-height': '2.3rem',
-    });
   });
 
   it('should render the component successfully', () => {
