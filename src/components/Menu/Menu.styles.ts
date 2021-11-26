@@ -68,6 +68,7 @@ export const IconWrapper = styled.button`
   border: none;
   background: none;
   position: relative;
+  cursor: pointer;
 `;
 
 export const Amount = styled.span`

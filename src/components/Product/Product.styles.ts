@@ -29,6 +29,10 @@ const wrapperModifiers = {
 
     ${Infos} {
       margin-top: ${theme.spacings['2xs']};
+
+      p {
+        flex: 1;
+      }
     }
 
     &:hover {
@@ -96,10 +100,6 @@ export const Infos = styled.div`
       -webkit-line-clamp: 3;
     }
 
-    p {
-      flex: 1;
-    }
-
     span {
       font-weight: bold;
       margin-top: calc(${theme.spacings['2xs']} / 2);
@@ -110,7 +110,6 @@ export const Infos = styled.div`
 export const RemoveProduct = styled.button`
   cursor: pointer;
   border: none;
-  background: #000;
 `;
 
 const buttonsContainerModifiers = {
