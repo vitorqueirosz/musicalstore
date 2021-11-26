@@ -19,7 +19,14 @@ export const Product = ({
   price,
   type = 'vertical',
 }: ProductProps) => {
-  const { addToCart, removeFromCart, isInTheCart } = useCart();
+  const {
+    addToCart,
+    removeFromCart,
+    isInTheCart,
+    getQuantity,
+    plusToCart,
+    minusToCart,
+  } = useCart();
 
   const isProductInTheCart = isInTheCart(id);
 
@@ -51,13 +58,13 @@ export const Product = ({
           </S.ButtonCart>
 
           <S.AmountContainer>
-            <S.ButtonState>
+            <S.ButtonState onClick={() => minusToCart(id)}>
               <Icon icon="IcMinus" />
             </S.ButtonState>
 
-            <span>1</span>
+            <span>{getQuantity(id)}</span>
 
-            <S.ButtonState>
+            <S.ButtonState onClick={() => plusToCart(id)}>
               <Icon icon="IcPlus" />
             </S.ButtonState>
           </S.AmountContainer>

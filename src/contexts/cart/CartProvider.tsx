@@ -14,6 +14,9 @@ type CartContextData = {
   removeFromCart: (id: string) => void;
   isLoading: boolean;
   isInTheCart: (id: string) => boolean;
+  plusToCart: (id: string) => void;
+  minusToCart: (id: string) => void;
+  getQuantity: (id: string) => number;
 };
 
 const initialValues = {
@@ -22,31 +25,93 @@ const initialValues = {
   removeFromCart: () => undefined,
   isLoading: false,
   isInTheCart: () => false,
+  plusToCart: () => undefined,
+  minusToCart: () => undefined,
+  getQuantity: () => 0,
+};
+
+type ProductPayload = {
+  id: string;
+  quantity: number;
 };
 
 const CartContext = createContext<CartContextData>(initialValues);
 
 export const CartProvider = ({ children }: WithChildren) => {
-  const [productIds, setProductIds] = useState<string[]>([]);
+  const [products, setProducts] = useState<ProductPayload[]>([]);
 
   const { data, isLoading } = useSearchProducts({
-    query: { id: productIds },
-    skip: !productIds.length,
+    query: { id: products.map((p) => p.id) },
+    skip: !products.length,
   });
 
   const addToCart = useCallback((id: string) => {
-    setProductIds((prevState) => [id, ...prevState]);
+    setProducts((prevState) => [
+      {
+        id,
+        quantity: 1,
+      },
+      ...prevState,
+    ]);
   }, []);
 
   const removeFromCart = useCallback((id: string) => {
-    setProductIds((prevState) =>
-      prevState.filter((productId) => productId !== id),
+    setProducts((prevState) =>
+      prevState.filter((product) => product.id !== id),
     );
   }, []);
 
   const isInTheCart = useCallback(
-    (id: string) => productIds.includes(id),
-    [productIds],
+    (id: string) => products.some((product) => product.id === id),
+    [products],
+  );
+
+  const plusToCart = useCallback((id: string) => {
+    setProducts((prevState) => {
+      const productIndex = prevState.findIndex((product) => product.id === id);
+      const products = [...prevState];
+
+      products[productIndex] = {
+        ...products[productIndex],
+        quantity: products[productIndex].quantity + 1,
+      };
+
+      return products;
+    });
+  }, []);
+
+  const minusToCart = useCallback(
+    (id: string) => {
+      setProducts((prevState) => {
+        const productIndex = prevState.findIndex(
+          (product) => product.id === id,
+        );
+        const products = [...prevState];
+        const product = products[productIndex];
+
+        const isEqualToOne = product.quantity === 1;
+
+        if (isEqualToOne) {
+          removeFromCart(id);
+          return products;
+        }
+
+        products[productIndex] = {
+          ...product,
+          quantity: product.quantity - 1,
+        };
+
+        return products;
+      });
+    },
+    [removeFromCart],
+  );
+
+  const getQuantity = useCallback(
+    (id: string) => {
+      return products.find((product) => product.id === id)?.quantity || 0;
+    },
+    [products],
   );
 
   const value = useMemo(() => {
@@ -56,8 +121,20 @@ export const CartProvider = ({ children }: WithChildren) => {
       removeFromCart,
       isLoading,
       isInTheCart,
+      plusToCart,
+      minusToCart,
+      getQuantity,
     };
-  }, [addToCart, removeFromCart, isLoading, data?.products, isInTheCart]);
+  }, [
+    addToCart,
+    removeFromCart,
+    isLoading,
+    data?.products,
+    isInTheCart,
+    plusToCart,
+    minusToCart,
+    getQuantity,
+  ]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

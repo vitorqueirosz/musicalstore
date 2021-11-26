@@ -7,14 +7,18 @@ import {
   Dropdown,
   CartDropdown,
 } from 'components';
+import { useCart } from 'contexts';
 import { useToggle, useClickOutside } from 'hooks';
 import { links } from './Menu.mock';
 
 import * as S from './Menu.styles';
 
 export const Menu = () => {
+  const { products } = useCart();
   const [isOpen, setIsOpen] = useToggle(false);
   const asideElementRef = useClickOutside(() => setIsOpen(false));
+
+  const amountProducts = products?.length;
 
   return (
     <S.Wrapper>
@@ -35,6 +39,7 @@ export const Menu = () => {
           title={
             <S.IconWrapper>
               <Icon icon="IcCart" aria-label="cart" />
+              <S.Amount>{amountProducts}</S.Amount>
             </S.IconWrapper>
           }
         >

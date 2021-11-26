@@ -67,6 +67,20 @@ export const Aside = styled.aside<AsideProps>`
 export const IconWrapper = styled.button`
   border: none;
   background: none;
+  position: relative;
+`;
+
+export const Amount = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -1.1rem;
+  right: -1rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.colors.lightBg};
 `;
 
 export const SignInButton = styled.div`

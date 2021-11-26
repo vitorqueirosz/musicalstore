@@ -185,6 +185,7 @@ export const ButtonState = styled.button`
   height: 100%;
   background: none;
   border: none;
+  cursor: pointer;
 
   &:hover {
     background: ${({ theme }) => darken(0.1, theme.colors.secondary)};
