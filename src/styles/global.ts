@@ -52,6 +52,25 @@ export const GlobalStyles: GlobalStyleComponent<
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+   ${({ theme }) => css`
+     &::-webkit-scrollbar,
+     &::-webkit-scrollbar-thumb {
+       border-radius: ${theme.borderRadius.xs};
+     }
+
+     &::-webkit-scrollbar {
+       width: 4px;
+     }
+
+     &::-webkit-scrollbar-track {
+       -webkit-box-shadow: inset 0 0 6px ${theme.colors.lightGray};
+     }
+
+     &::-webkit-scrollbar-thumb {
+       background-color: ${theme.colors.gray};
+     }
+   `}
+
     &::before,
     &::after {
       box-sizing: inherit;
