@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     border-top-right-radius: 0;
     max-height: 25rem;
     padding: ${theme.spacings['2xs']};
+    overflow-y: auto;
 
     ${media.lessThan('medium')`
       width: 80vw;

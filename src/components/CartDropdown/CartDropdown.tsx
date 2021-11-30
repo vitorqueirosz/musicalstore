@@ -1,14 +1,17 @@
-import { products } from './CartDropdown.mock';
-import { Product } from 'components';
+import { Product, ProductProps } from 'components';
 import * as S from './CartDropdown.styles';
 
-export const CartDropdown = () => {
+type CartDropdownProps = {
+  products: ProductProps[];
+};
+
+export const CartDropdown = ({ products }: CartDropdownProps) => {
   return (
     <S.Wrapper>
       <S.Title>Carrinho</S.Title>
 
       {products.map((product) => (
-        <Product key={product.id} {...product} />
+        <Product key={product.id} {...product} type="horizontal" />
       ))}
     </S.Wrapper>
   );

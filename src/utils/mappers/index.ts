@@ -1,4 +1,4 @@
-import { ProductDetailsProps } from 'components';
+import { ProductDetailsProps, ProductProps } from 'components';
 import { HomeProps } from 'templates';
 import { ProductByQuery, ProductDetailsByQuery } from 'types/common';
 import { BannersByQuery, HomeQueryPayload } from 'utils/home';
@@ -15,7 +15,7 @@ const bannersWithDefaultImgUrl = (banners: BannersByQuery[] | undefined) => {
 
 export const productsWithDefaultImgUrl = (
   products: ProductByQuery[] | undefined,
-) => {
+): ProductProps[] => {
   return products?.length
     ? products.map((product) => ({
         ...product,

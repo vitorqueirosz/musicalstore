@@ -12,6 +12,24 @@ export type ProductProps = {
   type?: 'vertical' | 'horizontal';
 };
 
+const AmountContainer = ({ id }: Pick<ProductProps, 'id'>) => {
+  const { getQuantity, plusToCart, minusToCart } = useCart();
+
+  return (
+    <S.AmountContainer>
+      <S.ButtonState onClick={() => minusToCart(id)}>
+        <Icon icon="IcMinus" />
+      </S.ButtonState>
+
+      <span>{getQuantity(id)}</span>
+
+      <S.ButtonState onClick={() => plusToCart(id)}>
+        <Icon icon="IcPlus" />
+      </S.ButtonState>
+    </S.AmountContainer>
+  );
+};
+
 export const Product = ({
   id,
   image,
@@ -19,14 +37,7 @@ export const Product = ({
   price,
   type = 'vertical',
 }: ProductProps) => {
-  const {
-    addToCart,
-    removeFromCart,
-    isInTheCart,
-    getQuantity,
-    plusToCart,
-    minusToCart,
-  } = useCart();
+  const { addToCart, removeFromCart, isInTheCart } = useCart();
 
   const isProductInTheCart = isInTheCart(id);
 
@@ -57,20 +68,15 @@ export const Product = ({
             />
           </S.ButtonCart>
 
-          <S.AmountContainer>
-            <S.ButtonState onClick={() => minusToCart(id)}>
-              <Icon icon="IcMinus" />
-            </S.ButtonState>
-
-            <span>{getQuantity(id)}</span>
-
-            <S.ButtonState onClick={() => plusToCart(id)}>
-              <Icon icon="IcPlus" />
-            </S.ButtonState>
-          </S.AmountContainer>
+          <AmountContainer id={id} />
         </S.ButtonsContainer>
       ) : (
-        <S.RemoveProduct onClick={() => addToCart(id)}>Remover</S.RemoveProduct>
+        <aside>
+          <S.RemoveProduct onClick={() => removeFromCart(id)}>
+            Remover
+          </S.RemoveProduct>
+          <AmountContainer id={id} />
+        </aside>
       )}
     </S.Wrapper>
   );

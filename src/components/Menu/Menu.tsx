@@ -43,7 +43,7 @@ export const Menu = () => {
             </S.IconWrapper>
           }
         >
-          <CartDropdown />
+          <CartDropdown products={products} />
         </Dropdown>
 
         <S.SignInButton>

@@ -142,6 +142,11 @@ export const ButtonsContainer = styled.div<RemoveProductProps>`
     opacity: 0;
     max-height: 2.3rem;
 
+    ${AmountContainer} {
+      width: 0;
+      opacity: 0;
+    }
+
     svg {
       width: 1.4rem;
       height: 1.4rem;
@@ -165,13 +170,14 @@ export const AmountContainer = styled.aside`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    width: 0;
-    opacity: 0;
     transition: width 0.2s ease-in-out, opacity 0.3s ease-in-out;
+    background: ${theme.colors.secondary};
+    height: 100%;
 
     span {
       color: ${theme.colors.white};
-      padding: calc(${theme.spacings['2xs']} / 2);
+      width: 2rem;
+      text-align: center;
     }
   `}
 `;
@@ -182,6 +188,7 @@ export const ButtonState = styled.button`
   align-items: center;
   width: 100%;
   height: 100%;
+  flex: 1;
   background: none;
   border: none;
   cursor: pointer;

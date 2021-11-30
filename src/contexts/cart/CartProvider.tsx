@@ -1,3 +1,4 @@
+import { ProductProps } from 'components';
 import { useSearchProducts } from 'hooks';
 import {
   createContext,
@@ -6,10 +7,11 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { ProductByQuery, WithChildren } from 'types/common';
+import { WithChildren } from 'types/common';
+import { productsWithDefaultImgUrl } from 'utils/mappers';
 
 type CartContextData = {
-  products: ProductByQuery[] | undefined;
+  products: ProductProps[];
   addToCart: (id: string) => void;
   removeFromCart: (id: string) => void;
   isLoading: boolean;
@@ -116,7 +118,7 @@ export const CartProvider = ({ children }: WithChildren) => {
 
   const value = useMemo(() => {
     return {
-      products: data?.products || [],
+      products: productsWithDefaultImgUrl(data?.products),
       addToCart,
       removeFromCart,
       isLoading,
