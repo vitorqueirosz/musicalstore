@@ -1,17 +1,19 @@
 import { GetServerSideProps } from 'next';
 import { Search as SearchTemplate } from 'templates';
-import { getSearchProducts, SearchQueryPayload } from 'utils/search';
+import { initializeApollo } from 'utils/apollo';
+import { getSearchProducts } from 'utils/search';
 
-export const Search = ({ products }: SearchQueryPayload) => {
-  return <SearchTemplate initialData={products} />;
+export const Search = () => {
+  return <SearchTemplate />;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { products } = await getSearchProducts(query);
+  const apolloClient = initializeApollo();
+  await getSearchProducts(query);
 
   return {
     props: {
-      products,
+      initialApolloState: apolloClient.cache.extract(),
     },
   };
 };

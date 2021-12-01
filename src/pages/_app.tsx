@@ -1,22 +1,23 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from 'styles/global';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { ApolloProvider } from '@apollo/client';
 import { CartProvider } from 'contexts';
 import theme from 'styles/theme';
-
-const queryClient = new QueryClient();
+import { useApollo } from 'utils/apollo';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const client = useApollo(pageProps.initialApolloState);
+
   return (
-    <QueryClientProvider client={queryClient}>
+    <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <CartProvider>
           <GlobalStyles />
           <Component {...pageProps} />
         </CartProvider>
       </ThemeProvider>
-    </QueryClientProvider>
+    </ApolloProvider>
   );
 }
 export default MyApp;

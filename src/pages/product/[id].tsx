@@ -12,13 +12,13 @@ const Product = ({ products }: ProductQueryPayload) => {
 
   const [product] = products;
 
-  return <ProductTemplate product={productDetailsMapper(product!)} />;
+  return <ProductTemplate product={productDetailsMapper(product)} />;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { products } = await getSearchProducts();
+  const { data } = await getSearchProducts();
 
-  const paths = products.map(({ id }) => ({
+  const paths = data.products.map(({ id }) => ({
     params: { id },
   }));
 
@@ -29,13 +29,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { products } = await getProductById(`${params?.id}`);
+  const { data } = await getProductById(`${params?.id}`);
 
-  if (!products.length) return { notFound: true };
+  if (!data.products.length) return { notFound: true };
 
   return {
     props: {
-      products,
+      products: data.products,
     },
   };
 };

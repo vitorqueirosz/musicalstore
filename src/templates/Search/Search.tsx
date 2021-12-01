@@ -7,11 +7,6 @@ import { Base } from 'templates';
 import * as S from './Search.styles';
 import { useSearchProducts } from 'hooks';
 import { productsWithDefaultImgUrl } from 'utils/mappers';
-import { ProductByQuery } from 'types/common';
-
-export type SearchProps = {
-  initialData: ProductByQuery[];
-};
 
 export const initialValue = {
   category: [],
@@ -45,7 +40,7 @@ const filterItems = [
   },
 ];
 
-export const Search = ({ initialData }: SearchProps) => {
+export const Search = () => {
   const { query, push } = useRouter();
   const pushRef = useRef(push);
 
@@ -66,8 +61,11 @@ export const Search = ({ initialData }: SearchProps) => {
   }, [query]);
 
   const { data } = useSearchProducts({
-    query: queryValues,
-    initialData: { products: initialData },
+    variables: {
+      where: {
+        ...queryValues,
+      },
+    },
   });
 
   const products = useMemo(

@@ -1,15 +1,38 @@
-import { GraphQLClient } from 'graphql-request';
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client';
+import { useMemo } from 'react';
 
-let graphQLClient: GraphQLClient;
+let apolloClient: ApolloClient<NormalizedCacheObject | null>;
+
+const isSSR = typeof window === 'undefined';
 
 export const createGraphQLClient = () => {
-  return new GraphQLClient(`${process.env.NEXT_PUBLIC_API_URL}/graphql`);
+  return new ApolloClient({
+    ssrMode: isSSR,
+    link: new HttpLink({
+      uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+      headers: {},
+    }),
+    cache: new InMemoryCache({}),
+  });
 };
 
-export const initializeClient = () => {
-  const clientGlobal = graphQLClient ?? createGraphQLClient();
+export const initializeApollo = (initialState = null) => {
+  const clientGlobal = apolloClient ?? createGraphQLClient();
 
-  if (!graphQLClient) graphQLClient = clientGlobal;
+  if (initialState) clientGlobal.cache.restore(initialState);
 
-  return clientGlobal;
+  if (!isSSR) return clientGlobal;
+
+  apolloClient = clientGlobal;
+
+  return apolloClient;
+};
+
+export const useApollo = (initialState = null) => {
+  return useMemo(() => initializeApollo(initialState), [initialState]);
 };

@@ -1,8 +1,8 @@
-import { gql } from 'graphql-request';
+import { gql } from '@apollo/client';
 import { ProductFragment } from 'graphql/fragments/product';
 
 export const QUERY_HOME = gql`
-  query Home {
+  query QueryHome {
     home {
       banners {
         buttonLabel

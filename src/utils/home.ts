@@ -1,7 +1,8 @@
 import { BannerProps, ProductsSectionProps } from 'components';
 import { ImageByQuery, ProductByQuery } from 'types/common';
 import { QUERY_HOME } from 'graphql/queries/home';
-import { initializeClient } from './apollo';
+import { initializeApollo } from './apollo';
+import { QueryHome } from 'graphql/generated/QueryHome';
 
 export type BannersByQuery = Omit<BannerProps, 'image'> & {
   image: ImageByQuery;
@@ -20,7 +21,9 @@ export type HomeQueryPayload = {
 };
 
 export const getHomeProducts = async () => {
-  const graphQLClient = initializeClient();
+  const apolloClient = initializeApollo();
 
-  return await graphQLClient.request<HomeQueryPayload>(QUERY_HOME);
+  return await apolloClient.query<QueryHome>({
+    query: QUERY_HOME,
+  });
 };
