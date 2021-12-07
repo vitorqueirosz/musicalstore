@@ -14,11 +14,9 @@ import { links } from './Menu.mock';
 import * as S from './Menu.styles';
 
 export const Menu = () => {
-  const { products } = useCart();
+  const { products, cartLength } = useCart();
   const [isOpen, setIsOpen] = useToggle(false);
   const asideElementRef = useClickOutside(() => setIsOpen(false));
-
-  const amountProducts = products?.length;
 
   return (
     <S.Wrapper>
@@ -39,7 +37,7 @@ export const Menu = () => {
           title={
             <S.IconWrapper>
               <Icon icon="IcCart" aria-label="cart" />
-              <S.Amount>{amountProducts}</S.Amount>
+              <S.Amount>{cartLength}</S.Amount>
             </S.IconWrapper>
           }
         >

@@ -1,14 +1,18 @@
 import { ProductProps } from 'components';
 import { useSearchProducts } from 'hooks';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import currency from 'currency.js';
 import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
 import { WithChildren } from 'types/common';
 import { productsWithDefaultImgUrl } from 'utils/mappers';
+import { CART_KEY } from 'constants/config';
 
 type CartContextData = {
   products: ProductProps[];
@@ -19,6 +23,8 @@ type CartContextData = {
   plusToCart: (id: string) => void;
   minusToCart: (id: string) => void;
   getQuantity: (id: string) => number;
+  total: number;
+  cartLength: number;
 };
 
 const initialValues = {
@@ -30,6 +36,8 @@ const initialValues = {
   plusToCart: () => undefined,
   minusToCart: () => undefined,
   getQuantity: () => 0,
+  total: 0,
+  cartLength: 0,
 };
 
 type ProductPayload = {
@@ -37,15 +45,37 @@ type ProductPayload = {
   quantity: number;
 };
 
+export const MAX_PRODUCTS = 12;
+
+const regexForPurePrice = /[.,R$]/g;
+const formatOptions = { fromCents: true, precision: 2 };
+
 const CartContext = createContext<CartContextData>(initialValues);
 
 export const CartProvider = ({ children }: WithChildren) => {
-  const [products, setProducts] = useState<ProductPayload[]>([]);
-
-  const { data, isLoading } = useSearchProducts({
-    query: { id: products.map((p) => p.id) },
-    skip: !products.length,
+  const [storage, setStorage] = useLocalStorage<string[]>(CART_KEY);
+  const [products, setProducts] = useState<ProductPayload[]>(() => {
+    if (storage) {
+      return storage.map((i) => ({ id: i, quantity: 1 }));
+    }
+    return [];
   });
+
+  const productIds = useMemo(() => products.map((p) => p.id), [products]);
+
+  const { data, loading } = useSearchProducts({
+    skip: !products.length,
+    variables: {
+      limit: MAX_PRODUCTS,
+      where: {
+        id: productIds,
+      },
+    },
+  });
+
+  useEffect(() => {
+    setStorage(productIds);
+  }, [productIds, setStorage]);
 
   const addToCart = useCallback((id: string) => {
     setProducts((prevState) => [
@@ -116,26 +146,42 @@ export const CartProvider = ({ children }: WithChildren) => {
     [products],
   );
 
+  const total = useMemo(() => {
+    const totalAdded = data?.products.reduce((acc, product) => {
+      const price = product.price.replace(regexForPurePrice, '');
+
+      return (acc = currency(acc).add(price).value);
+    }, 0);
+
+    const totalPrice = currency(totalAdded || 0, formatOptions).value;
+
+    return totalPrice;
+  }, [data?.products]);
+
   const value = useMemo(() => {
     return {
       products: productsWithDefaultImgUrl(data?.products),
       addToCart,
       removeFromCart,
-      isLoading,
+      isLoading: loading,
       isInTheCart,
       plusToCart,
       minusToCart,
       getQuantity,
+      total,
+      cartLength: products.length,
     };
   }, [
     addToCart,
     removeFromCart,
-    isLoading,
+    loading,
     data?.products,
     isInTheCart,
     plusToCart,
     minusToCart,
     getQuantity,
+    total,
+    products.length,
   ]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

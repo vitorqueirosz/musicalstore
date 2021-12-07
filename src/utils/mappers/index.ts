@@ -18,7 +18,9 @@ export const productsWithDefaultImgUrl = (
 ): ProductProps[] => {
   return products?.length
     ? products.map((product) => ({
-        ...product,
+        id: product.id,
+        name: product.name,
+        price: product.price,
         image: setDefaultUrlToImg(product.images[0].url),
       }))
     : [];

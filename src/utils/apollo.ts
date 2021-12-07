@@ -4,11 +4,10 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
+import { isSSR } from 'constants/config';
 import { useMemo } from 'react';
 
 let apolloClient: ApolloClient<NormalizedCacheObject | null>;
-
-const isSSR = typeof window === 'undefined';
 
 export const createGraphQLClient = () => {
   return new ApolloClient({

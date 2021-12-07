@@ -8,6 +8,10 @@ describe('homeMapper()', () => {
       id: '1',
       name: 'product',
       price: '5',
+    };
+
+    const productWithImages = {
+      ...product,
       images: [
         {
           url: 'image',
@@ -26,11 +30,11 @@ describe('homeMapper()', () => {
         ],
         highlights: {
           title: 'title',
-          products: [product],
+          products: [productWithImages],
         },
         releases: {
           title: 'title',
-          products: [product],
+          products: [productWithImages],
         },
       },
     };
