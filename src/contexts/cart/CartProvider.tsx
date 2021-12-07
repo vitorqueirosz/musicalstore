@@ -1,6 +1,5 @@
 import { ProductProps } from 'components';
-import { useSearchProducts } from 'hooks';
-import { useLocalStorage } from 'hooks/useLocalStorage';
+import { useSearchProducts, useLocalStorage } from 'hooks';
 import currency from 'currency.js';
 import {
   createContext,
