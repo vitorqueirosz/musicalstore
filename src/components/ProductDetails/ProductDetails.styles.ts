@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components';
+import { Wrapper as ButtonWrapper } from 'components/Button/Button.styles';
 
 type ZoomedImageProps = {
   show: boolean;
@@ -108,12 +109,17 @@ export const Details = styled.div`
 export const ButtonContainer = styled.div`
   ${({ theme }) => css`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background: #2e2e2e;
     width: 100%;
     padding: ${theme.spacings.xs};
     border-radius: ${theme.borderRadius.xs};
+
+    ${ButtonWrapper} {
+      width: 100%;
+      max-width: 19rem;
+    }
   `}
 `;
 
@@ -121,4 +127,30 @@ export const Description = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+`;
+
+export const BuyContainer = styled.div``;
+
+export const AmountContainer = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 10rem;
+
+    span {
+      font-size: ${theme.font.sizes['2lg']};
+      color: ${theme.colors.lightGray};
+    }
+  `}
+`;
+
+export const ButtonState = styled.button`
+  ${({ theme }) => css`
+    border: none;
+    background: ${theme.colors.mainBg};
+    padding: 2px;
+    cursor: pointer;
+  `}
 `;

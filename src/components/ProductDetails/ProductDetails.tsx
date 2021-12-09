@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useRef, useState } from 'react';
-import { Button } from 'components';
+import { Button, Icon } from 'components';
 import * as S from './ProductDetails.styles';
 
 export type ProductDetailsProps = {
@@ -20,10 +20,14 @@ export const ProductDetails = ({
   description,
   brand,
 }: ProductDetailsProps) => {
+  const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState('');
   const imgRef = useRef<HTMLImageElement | null>(null);
   const targetRef = useRef<HTMLSpanElement | null>(null);
   const [isReady, setIsReady] = useState(false);
+
+  const addQuantity = () => setQuantity((prevState) => prevState + 1);
+  const removeQuantity = () => setQuantity((prevState) => prevState - 1);
 
   const handleSelectedImage = (image: string) => setSelectedImage(image);
 
@@ -96,6 +100,17 @@ export const ProductDetails = ({
           </S.Details>
 
           <S.ButtonContainer>
+            <S.AmountContainer>
+              <S.ButtonState onClick={removeQuantity}>
+                <Icon icon="IcMinus" />
+              </S.ButtonState>
+
+              <span>{quantity}</span>
+
+              <S.ButtonState onClick={addQuantity}>
+                <Icon icon="IcPlus" />
+              </S.ButtonState>
+            </S.AmountContainer>
             <Button>Comprar</Button>
           </S.ButtonContainer>
         </S.Infos>

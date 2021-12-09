@@ -172,7 +172,6 @@ export const AmountContainer = styled.aside`
     align-items: center;
     transition: width 0.2s ease-in-out, opacity 0.3s ease-in-out;
     background: ${theme.colors.secondary};
-    height: 100%;
 
     span {
       color: ${theme.colors.white};

@@ -93,8 +93,8 @@ export const CartProvider = ({ children }: WithChildren) => {
   }, []);
 
   const isInTheCart = useCallback(
-    (id: string) => products.some((product) => product.id === id),
-    [products],
+    (id: string) => productIds.includes(id),
+    [productIds],
   );
 
   const plusToCart = useCallback((id: string) => {

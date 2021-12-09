@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Icon } from 'components';
 import { ROUTES } from 'constants/routes';
 import { useCart } from 'contexts';
@@ -38,8 +39,12 @@ export const Product = ({
   type = 'vertical',
 }: ProductProps) => {
   const { addToCart, removeFromCart, isInTheCart } = useCart();
+  const [isInCart, setIsInCart] = useState(false);
 
-  const isProductInTheCart = isInTheCart(id);
+  useEffect(() => {
+    const isProductInTheCart = isInTheCart(id);
+    setIsInCart(isProductInTheCart);
+  }, [id, isInTheCart]);
 
   return (
     <S.Wrapper type={type}>
@@ -54,17 +59,13 @@ export const Product = ({
       </Link>
 
       {type === 'vertical' ? (
-        <S.ButtonsContainer isInTheCart={isProductInTheCart}>
+        <S.ButtonsContainer isInTheCart={isInCart}>
           <S.ButtonCart
-            onClick={() =>
-              isProductInTheCart ? removeFromCart(id) : addToCart(id)
-            }
+            onClick={() => (isInCart ? removeFromCart(id) : addToCart(id))}
           >
             <Icon
-              aria-label={
-                isProductInTheCart ? 'remove from cart' : 'add to cart'
-              }
-              icon={isProductInTheCart ? 'IcTrash' : 'IcCart'}
+              aria-label={isInCart ? 'remove from cart' : 'add to cart'}
+              icon={isInCart ? 'IcTrash' : 'IcCart'}
             />
           </S.ButtonCart>
 
